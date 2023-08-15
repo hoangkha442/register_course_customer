@@ -1,0 +1,38 @@
+.search-form::before{
+    font-family: "Font Awesome 5 Free";
+   content: "\f002";
+   display: block;
+    position: absolute;
+   display: inline-block;
+   padding-right: 3px;
+   font-weight: 900;
+   top: 8px;
+    left: 15px;
+    z-index: 10; 
+    font-size: 18px !important;
+    color: #00000080 !important;
+}
+
+.ant-modal-wrap .ant-modal {
+    width: 270px !important;
+    margin: 0!important;
+    margin-left: auto !important;
+    padding-bottom: 0 !important;
+    top: 0;
+}
+
+.ant-modal .ant-modal-content {
+    height: 100vh;
+}
+
+.ant-menu-item-selected{
+    background: transparent !important;
+}
+
+.ant-menu-light.ant-menu-root.ant-menu-vertical{
+    width: 100% !important;
+}
+
+.ant-modal-footer{
+    display: none !important;
+}
