@@ -6,7 +6,7 @@ import HeaderMobile from './HeaderMobile'
 
 export default function Header() {
   return (
-    <header>
+    <header className='w-full'>
       <div>
           <Desktop>
             <HeaderDesktop />

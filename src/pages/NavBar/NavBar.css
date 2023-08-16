@@ -1,0 +1,30 @@
+.BorderOuterOutlined{
+    border-right: none !important;
+}
+
+.bg-liner-courses {
+    background-image: linear-gradient(to bottom right, #fcd34d, #ef4444);
+}
+.ant-menu.ant-menu-root.ant-menu-vertical.ant-menu-light{
+    border-inline-end: none !important;
+    border: none !important;
+}
+
+.ant-menu-light .ant-menu-item-selected, .ant-menu-light>.ant-menu .ant-menu-item-selected{
+    background: rgba(42, 65, 232, 0.07) !important;
+}
+.ant-menu-light .ant-menu-item-selected .ant-menu-title-content span{
+    color: #2a41e8 !important;
+}
+
+.ant-menu-item-selected .ant-menu-title-content span{
+    color: rgb(88, 87, 87);
+}   
+
+.ant-menu-item{
+    margin: 8px 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    height: 45px !important;
+    padding-left: 10px !important;
+}

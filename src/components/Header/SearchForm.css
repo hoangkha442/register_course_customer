@@ -25,9 +25,6 @@
     height: 100vh;
 }
 
-.ant-menu-item-selected{
-    background: transparent !important;
-}
 
 .ant-menu-light.ant-menu-root.ant-menu-vertical{
     width: 100% !important;
