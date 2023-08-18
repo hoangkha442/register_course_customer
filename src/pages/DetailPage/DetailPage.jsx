@@ -145,7 +145,7 @@ export default function DetailPage() {
                                 <li className="hover:bg-gray-200 p-2 hover:text-[#585757] transition-all duration-300 flex rounded items-center cursor-pointer">
                                     <PlayCircleOutlined  className='mr-3'/>
                                     Your First Web Page 
-                                    <a href="#trailer-modal" className="bg-gray-200 ml-4 px-2 py-1 rounded-full text-xs" uk-toggle> Preview </a>
+                                    <a href="#trailer-modal" className="bg-gray-200 ml-4 px-2 py-1 rounded-full text-xs"> Preview </a>
                                     <span className="text-sm ml-auto"> 4 min </span>
                                 </li>
                                 <li className="hover:bg-gray-200 p-2 hover:text-[#585757] transition-all duration-300 flex rounded items-center cursor-pointer">
@@ -203,7 +203,7 @@ export default function DetailPage() {
                 </div>
                 <h4 className="leading-8 text-xl"> Nam liber tempor cum soluta nobis eleifend option congue imperdiet
                     doming id quod  .</h4>
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                <p className='text-[#727374] text-[15px]'> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                     labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                     laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
                     voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
@@ -302,7 +302,7 @@ export default function DetailPage() {
                     <div>
                         <h4 className="text-base m-0 font-semibold"> Stella Johnson</h4>
                         <span className="text-gray-700 text-sm"> 14th, August 2023 </span>
-                        <p className="mt-3 md:ml-0 -ml-16">
+                        <p className="mt-3 md:ml-0 -ml-16 text-[#727374] text-[15px]">
                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam ut laoreet dolore
                         magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
                         ullamcorper suscipit 
@@ -321,7 +321,7 @@ export default function DetailPage() {
                     <div>
                         <h4 className="text-base m-0 font-semibold"> Alex Dolgove</h4>
                         <span className="text-gray-700 text-sm"> 16th, May 2021 </span>
-                        <p className="mt-3 md:ml-0 -ml-16">
+                        <p className="mt-3 md:ml-0 -ml-16 text-[#727374] text-[15px]">
                         elit, sed diam ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim ipsum dolor sit
                         amet, consectetuer adipiscing elit 
                         </p>
@@ -339,7 +339,7 @@ export default function DetailPage() {
                     <div>
                         <h4 className="text-base m-0 font-semibold"> Trap Nation</h4>
                         <span className="text-gray-700 text-sm"> 16th, May 2021 </span>
-                        <p className="mt-3 md:ml-0 -ml-16">
+                        <p className="mt-3 md:ml-0 -ml-16 text-[#727374] text-[15px]">
                         elit, sed diam ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim ipsum dolor sit
                         amet, consectetuer 
                         </p>
