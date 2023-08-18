@@ -23,7 +23,7 @@ export default function FeaturedClasses() {
           </div>
           <div className="col-span-8 p-6">
             <p className='line-clamp-2 font-semibold md:leading-relaxed md:text-xl text-[#666666]'>{item.danhMucKhoaHoc.tenDanhMucKhoaHoc}</p>
-            <p className='mt-2 md:block hidden text-[#666666] font-[300]'>{item.moTa.length > 150 ? item.moTa.slice(0,200) + '...' : item.moTa}</p>
+            <p className='mt-2 md:block hidden text-[#666666] font-[300]'>{item.moTa.length > 80 ? item.moTa.slice(0,70) + '...' : item.moTa}</p>
             <p className='font-semibold mt-3 text-[#666666]'>{item.nguoiTao.hoTen}</p>
             <div className="flex items-center justify-between">
               <div className="flex space-x-2 items-center text-sm pt-2 text-[#666666]">

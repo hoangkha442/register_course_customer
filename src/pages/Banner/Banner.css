@@ -1,36 +1,5 @@
 /* CAROUSEL */
-.banner-item::before{
-    content: "";
-    width: 50%;
-    height: 100%;
-    position: absolute;
-    top: 50%;
-    left: -100%;
-    display: block;
-    background: red;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 100%);
-    transform: skewX(-25deg);
-    transition: all 0.75s;
-}
-.figcaption-text{
-    position: absolute;
-    bottom: 30px;
-    left: 30px;
-    text-align: left;
-    transform: translateY(150px);
-    transition: all .75s;
-}
-
-.overlay:hover .figcaption-text{
-    transform: translateY(40px);
-    color: #dcf836 !important;
-}
-
-.bg-overlay{
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.slick-dots .slick-dots-bottom{
-    justify-content: end!important;
-    margin-right: 80px!important;
+.slick-dots{
+    justify-content: start!important;
+    margin-left: 30px!important;
 }

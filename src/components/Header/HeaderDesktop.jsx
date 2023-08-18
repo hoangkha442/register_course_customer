@@ -30,7 +30,7 @@ export default function HeaderDesktop() {
       <div className="overla absolute w-full h-full blur-[40px]"></div>
       {user ? 
       <>
-        <header  className=' bg-transparent flex items-center px-8 border-b-[#e8ebed] border-b sticky right-0 top-0 z-20'>
+        <header  className=' bg-transparent flex items-center px-5 border-b-[#e8ebed] border-b sticky right-0 top-0 z-20'>
         <div className="logo w-[300px] h-[72px] flex flex-1 items-center">
           <a href="#" className=''>
             <img className='w-40' src="./img/logo.png" alt="" />

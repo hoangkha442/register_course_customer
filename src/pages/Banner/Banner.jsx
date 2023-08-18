@@ -1,5 +1,6 @@
 import React from 'react'
 import { Carousel } from 'antd';
+import './Banner.css'
 export default function Banner() {
   return (
     <div className='w-full ml-[20%]'>

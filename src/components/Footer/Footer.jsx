@@ -6,8 +6,8 @@ import FooterMobile from './FooterMobile'
 
 export default function Footer() {
   return (
-    <div className='bg-footer'>
-      <div className="container-90 py-20">
+    <div className='ml-[20%] bg-[#f9fafb] py-5 border-t border-t-[#e5e7eb]'>
+      <div className="container-90">
         <Desktop>
           <FooterDesktop />
         </Desktop>
