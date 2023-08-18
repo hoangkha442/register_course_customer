@@ -25,7 +25,7 @@ export default function PopularCoureses() {
           className="rounded-md bg-white shadow-sm cursor-pointer relative"
         >
           <div className="absolute cursor-default rounded-md w-full h-full bg-gradient-to-tl from-[#c4b5fd] to-[#3b82f6]  opacity-0 hover:opacity-100 transition-all duration-500">
-            <div class="px-[19px] py-[30px] CoursesItem_item__courses-hover__AFTCZ">
+            <div class="px-[19px] py-[30px]">
               <div>
                 <h2 class="font-bold text-xl mb-5 text-white">
                 {item.danhMucKhoaHoc.tenDanhMucKhoaHoc}
@@ -84,7 +84,7 @@ export default function PopularCoureses() {
   };
   return (
     <div>
-      <div class="sm:my-4 my-3 flex items-end justify-between pt-14">
+      <div class="sm:my-4 my-3 flex items-end justify-between pt-8">
         <h2 class="text-2xl font-semibold"> Popular Classes </h2>
         <a href="#" class="text-[#2a41e8] sm:block hidden">
           See all

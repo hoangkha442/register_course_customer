@@ -41,7 +41,7 @@ export default function FeaturedClasses() {
     })
    }
   return (
-    <div className='container-80 py-[30px]'>
+    <div className='container-80 py-3'>
       <div class="sm:my-4 my-3 flex items-end justify-between pt-3">
         <h2 class="text-2xl font-semibold">Featured Classes</h2> 
       </div>

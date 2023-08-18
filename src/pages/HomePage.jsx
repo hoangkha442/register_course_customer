@@ -11,8 +11,8 @@ export default function HomePage() {
       </div>
       <div className="col-span-12 border-l border-l-[#e5e7eb]">
         <Banner />
-        <div className="bg-white ml-[20%]">
-          <div className=" border-l border-l-[#e5e7eb] ">
+        <div className="bg-[#f9fafb] ml-[20%]">
+          <div className=" border-l border-l-[#e5e7eb] pb-14">
             <FeaturedClasses />
           </div>
         </div>
