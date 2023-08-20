@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import './SearchForm.css'
 import { Button, Modal } from 'antd'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { userLocalStorage } from '../../services/LocalService'
+import { ShoppingCartOutlined, MailOutlined, BellOutlined } from '@ant-design/icons';
 import Swal from 'sweetalert2'
 
 export default function HeaderDesktop() {
@@ -24,15 +25,20 @@ export default function HeaderDesktop() {
       window.location.reload()
     })
    }
+   const listRegisterCourses = useSelector((state) => {
+    return state.coursesSlice.coursesListRegister;
+  });
   const [showModalTailwind, setShowModalTailwind] = React.useState(false);
   return (
     <div className='fixed w-full z-50 bg-transparent backdrop-blur-[40px]'>
       <div className="overla absolute w-full h-full blur-[40px]"></div>
       {user ? 
       <>
-        <header  className=' bg-transparent flex items-center px-5 border-b-[#e8ebed] border-b sticky right-0 top-0 z-20'>
+        <header  className='bg-transparent flex items-center px-5 border-b-[#e8ebed] border-b sticky right-0 top-0 z-20'>
         <div className="logo w-[300px] h-[72px] flex flex-1 items-center">
-          <a href="#" className=''>
+          <a onClick={() => { 
+            navigate('/')
+           }} className=''>
             <img className='w-40' src="./img/logo.png" alt="" />
           </a>
         </div>
@@ -52,15 +58,18 @@ export default function HeaderDesktop() {
         </div>
         <div className="flex items-center justify-end flex-1 h-[72px]" >
           <div className="flex items-center space-x-5">
-            <button><i class="text-xl fa-solid fa-cart-shopping text-white"></i></button>
-            <button><i class="text-xl fa fa-envelope text-white"></i></button>
-            <button><i class="text-xl fa fa-bell text-white"></i></button>
+            <button className='relative z-10'>
+              <div className="absolute -top-1 -right-3 w-5 h-5 leading-5 bg-gradient-to-r from-[#fcaa4d] to-[#ef4444] rounded-full text-white text-xs font-bold z-20 text-center align-middle">{listRegisterCourses.length}</div>
+              <ShoppingCartOutlined className='text-2xl'/>
+            </button>
+            <button><MailOutlined className='text-2xl'/></button>
+            <button><BellOutlined className='text-2xl'/></button>
             <div className="">
             <button type="primary" onClick={() => setShowModalTailwind(true)}>
               <img
-              alt="avatar"
-              className="w-8 h-8 mr-4 rounded-full ring-2 ring-offset-4 ring-red-500 ring-offset-red-200"
-              src="https://source.unsplash.com/40x40/?portrait?1"
+                alt="avatar"
+                className="w-8 h-8 mr-4 rounded-full ring-2 ring-offset-4 ring-red-500 ring-offset-red-200"
+                src="https://source.unsplash.com/40x40/?portrait?1"
               />
               </button>
               {showModalTailwind ? (
@@ -108,7 +117,7 @@ export default function HeaderDesktop() {
                           <li className=''>
                             <div className="border-b border-solid border-slate-200 rounded-t">
                               <a className="flex py-2 px-4 text-[#616161] text-[14px] font-[400] items-center space-x-3 cursor-pointer hover:bg-[#f1f3f4] hover:text-black transition-all duration-500">
-                                <p className=''>Posts Saveds</p>
+                                <NavLink to='/wish-list/#'><p className=''>Wishlish</p></NavLink>
                                 </a>
                             </div>
                           </li>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
-import NavBar from '../NavBar/NavBar'
+import NavBar from '../HomePage/NavBar/NavBar'
 import { CoursesService } from '../../services/CoursesService'
 import { StarOutlined, StarFilled, StarTwoTone, UsergroupAddOutlined, PlayCircleOutlined, KeyOutlined, DownloadOutlined, QuestionCircleOutlined, SafetyCertificateOutlined, CheckOutlined, DownOutlined, UpOutlined } from '@ant-design/icons';
 

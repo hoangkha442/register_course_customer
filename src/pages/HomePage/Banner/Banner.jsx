@@ -8,7 +8,7 @@ export default function Banner() {
     <div className=''>
       <figure className='banner-item hover:before:left-[125%] relative overflow-hidden cursor-pointer rounded-lg'>
         <img className='h-[470px] object-cover rounded-lg' src='./img/banner2.jpg' alt='banner1' />
-          <figcaption className='overlay absolute left-0 bottom-0 w-full h-[100%] bg-overlay transition-all rounded-lg'>
+          <figcaption className='absolute left-0 bottom-0 w-full h-[100%] transition-all rounded-lg'>
             <div className='figcaption-text w-[80%] h-full mx-auto flex flex-col justify-center mt-10'>
               <p className='text-white font-bold text-4xl tracking-wider'>Learn form the best</p>
               <p className='font-[500] text-base text-white my-4'> Choose from 130,000 online video courses with new <br /> additions published every month</p>
@@ -22,7 +22,7 @@ export default function Banner() {
     <div>
       <figure className='banner-item hover:before:left-[125%] relative overflow-hidden cursor-pointer rounded-lg'>
         <img className='h-[470px] object-cover rounded-lg' src='./img/banner1.jpg' alt='banner1' />
-          <figcaption className='overlay absolute left-0 bottom-0 w-full h-[100%] bg-overlay transition-all rounded-lg'>
+          <figcaption className=' absolute left-0 bottom-0 w-full h-[100%] transition-all rounded-lg'>
             <div className='figcaption-text w-[80%] h-full mx-auto flex flex-col justify-center mt-10'>
               <p className='text-white font-bold text-4xl tracking-wider'>Learn form the best</p>
               <p className='font-[500] text-base text-white my-4'> Choose from 130,000 online video courses with new <br /> additions published every month</p>

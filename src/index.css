@@ -6,6 +6,17 @@ body{
     font-family: 'Inter', sans-serif;
 }
 
+
+html *::-webkit-scrollbar {
+    border-radius: 0;
+    width: 10px;
+  }
+  html *::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #abb7c4;
+  }
+  
+
 .container-90{
     width: 90%;
     margin-left: auto;

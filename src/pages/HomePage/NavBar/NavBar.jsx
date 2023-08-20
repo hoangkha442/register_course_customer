@@ -10,7 +10,7 @@ const items = [
     icon: <div className="rounded-md w-8 h-8 bg-gradient-to-tl from-[#c4b5fd] to-[#3b82f6] text-2xl justify-center"><HomeOutlined style={{fontSize: '16px', textAlign: 'center'}} className='text-white' /></div>,
   },
   {
-    label: <span className='text-[15px] font-[500] tracking-wider] text-[#585757]'>Courses</span>,
+    label: <NavLink to='/course-list'><span className='text-[15px] font-[500] tracking-wider] text-[#585757]'>Courses</span></NavLink>,
     key: 'Courses',
     icon: <div className="rounded-md w-8 h-8 bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] text-2xl justify-center"><PlayCircleOutlined style={{fontSize: '18px', textAlign: 'center'}} className='text-white' /></div>,
   },
@@ -68,8 +68,8 @@ export default function NavBar() {
     setCurrent(e.key);
   };
   return (
-    <div className="px-5 bg-white">
-      <div className='mt-3 top-0  h-screen bg-white'>
+    <div className="px-5 bg-white   scroll-bar scroll-smooth" style={{ overflowY: "scroll", height: '800' }}>
+      <div className='mt-3 top-0  h-screen bg-white' >
         <Menu className='my-2 bg-white' onClick={onClick} selectedKeys={[current]} items={items} />
         <div className="border-t" id='menu-2'>
           <div className="pl-2">

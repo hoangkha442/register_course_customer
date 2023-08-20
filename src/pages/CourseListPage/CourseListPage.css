@@ -1,0 +1,68 @@
+.ant-card .ant-card-body {
+    padding: 15px;
+    border-radius: 0 0 8px 8px;
+    background: white !important;
+    border: 1px solid #e5e7eb !important;
+}
+
+.ant-card .ant-card-meta-title {
+    color: #585757 !important;
+    text-transform: uppercase;;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+.ant-card .ant-card-meta-title{
+    transition: all 1s;
+}
+/* .ant-card:hover .ant-card-meta-title{
+    color: #dcf836 !important;
+} */
+.ant-card .ant-card-meta-detail >div:not(:last-child) {
+    margin-bottom: 4px;
+}
+.ant-card-meta-description {
+    color: #c6ced5;
+}
+
+.movie-item::before{
+    content: "";
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: -100%;
+    display: block;
+    background: red;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 100%);
+    transform: skewX(-25deg);
+    transition: all 0.75s;
+}
+.figcaption-btn{
+    position: absolute;
+    bottom: 28%;
+    left: 23%;
+    text-align: left;
+    transform: translateY(150px);
+    transition: all .75s;
+}
+
+.overlay:hover .figcaption-btn{
+    transform: translateY(0px);
+}
+
+.overlay:hover button{
+    color: white !important;
+}
+.overlay button span,
+.overlay button i{
+    transition: all .75s;
+}
+.overlay button:hover span,
+.overlay button:hover i{
+    color: #dcf836 !important;
+}
+
+.bg-overlay{
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 6px !important;
+}

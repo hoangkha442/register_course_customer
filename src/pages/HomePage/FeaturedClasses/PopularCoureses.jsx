@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { CoursesService } from "../../../services/CoursesService";
 import { Card } from "antd";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import './Courses.css'
+import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
+import { setCourseAddToCart } from "../../../redux/coursesSlice";
 const { Meta } = Card;
 
 export default function PopularCoureses() {
@@ -17,6 +20,12 @@ export default function PopularCoureses() {
         console.log();
       });
   }, []);
+  const user = useSelector((state) => { 
+    return state.userSlice.userInfo
+  })
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  
   const renderPopularCoureses = () => {
     return PopularCoureses.slice(1, 4).map((item, index) => {
       return (
@@ -42,7 +51,9 @@ export default function PopularCoureses() {
                 </h4>
                 <div className="flex justify-between">
                     <div className="">
-                      <button className="px-3 py-1 text-white border-[#c4b5fd] border bg-gradient-to-tl from-[#3b82f6] to-[#c4b5fd] rounded-sm">Add To Cart</button>
+                      <button onClick={() => { 
+                        handleAddToCart(item.maKhoaHoc, item)
+                       }} className="px-3 py-1 text-white border-[#c4b5fd] border bg-gradient-to-tl from-[#3b82f6] to-[#c4b5fd] rounded-sm">Add To Cart</button>
                     </div>
                     <div className="">
                       <NavLink to={`/detail/${item?.maKhoaHoc}`}>
@@ -81,6 +92,36 @@ export default function PopularCoureses() {
         </div>
       );
     });
+  };
+  // console.log('PopularCoureses', PopularCoureses);
+  const handleAddToCart = (items, cart) => {
+    if (user) {
+      CoursesService.postRegisterCourses({
+        maKhoaHoc: items,
+        taiKhoan: user.taiKhoan,
+      })
+      .then((res) => {
+          dispatch(setCourseAddToCart(cart));
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Added course to cart",
+            showConfirmButton: false,
+            timer: 1000,
+          });
+        })
+        .catch((err) => {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "The course is already in your cart",
+            showConfirmButton: false,
+            timer: 1000,
+          });
+        });
+    } else {
+      navigate("/login");
+    }
   };
   return (
     <div>
