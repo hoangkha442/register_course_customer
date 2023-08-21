@@ -8,6 +8,7 @@ import DetailPage from './pages/DetailPage/DetailPage';
 import WishList from './pages/WishList/WishList';
 import CourseListPage from './pages/CourseListPage/CourseListPage';
 import CheckOut from './pages/CheckOut/CheckOut';
+import UserProfile from './pages/UserProfile/UserProfile';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path='/course-list' element={<CourseListPage />}/>
             <Route path='/wish-list' element={<WishList />}/>
             <Route path='/check-out' element={<CheckOut />}/>
+            <Route path='/profile' element={<UserProfile />}/>
           </Route>
         </Routes>
       </Router>

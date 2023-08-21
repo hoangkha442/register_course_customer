@@ -5,6 +5,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { UserService } from '../../services/UserService';
 import Swal from "sweetalert2";
+import NavBar from '../HomePage/NavBar/NavBar';
 
 
 const { Option } = Select;
@@ -19,6 +20,7 @@ export default function RegisterPage() {
   const regexName = /^(?=.*[a-zA-Z]).{1,20}$/;
   const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   const regexPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+{};:,<.>/?]).{1,20}$/;
+
   const onFinish = (values) => {
     console.log('values: ', values);
     UserService.postRegister(values)
@@ -46,8 +48,15 @@ export default function RegisterPage() {
   };
   const [form] = Form.useForm();
   return (
-    <div className="Login py-10">
-    <div className="container-80">
+
+  <div className='h-max-content min-h-screen w-full bg-cover bg-white flex overflow-hidden relative'>
+    <div className="absolute w-full h-full bg-[#e5e7eb]"></div>
+      <div className="pt-[70px] fixed h-screen top-0 w-[20%] bg-white flex-shrink-0  border-r border-r-[#e5e7eb]">
+        <NavBar />
+      </div>
+      <div className="min-h-screen w-[80%] ml-auto"> 
+        <div className='py-[90px]'>
+        <div className="container-80">
           <div className="relative flex flex-col justify-cente overflow-hidden">
             <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl md:max-w-lg">
               <h1 className="text-3xl font-semibold text-center text-purple-700 uppercase">
@@ -185,29 +194,6 @@ export default function RegisterPage() {
                     <Option value="GP08">GP08</Option>
                   </Select>
                 </Form.Item>
-                {/* <Form.Item
-                  label="ID Group"
-                  className='mb-2'
-                  name="group"
-                >
-                  <Select
-                    defaultValue="GP01"
-                    style={{ width: 120 }}
-                    onChange={handleChange}
-                    options={[
-                      { value: 'GP01', label: 'GP01' },
-                      { value: 'GP02', label: 'GP02' },
-                      { value: 'GP03', label: 'GP03' },
-                      { value: 'GP04', label: 'GP04' },
-                      { value: 'GP05', label: 'GP05' },
-                      { value: 'GP06', label: 'GP06' },
-                      { value: 'GP07', label: 'GP07' },
-                      { value: 'GP08', label: 'GP08' },
-                      { value: 'GP09', label: 'GP09' },
-                      { value: 'GP10', label: 'GP10' }
-                    ]}
-                  />
-                </Form.Item> */}
                 {/* BUTTON */}
                 <Form.Item
                   className='mt-6'
@@ -230,6 +216,9 @@ export default function RegisterPage() {
             </div>
           </div>
     </div>
-   </div>
+        </div>
+    </div>
+  </div>
+      
   )
 }

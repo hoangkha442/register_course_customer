@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function FooterDesktop() {
   return (
-    <Row gutter={52} className=''>
+    <Row gutter={52}>
           <Col lg={6}>
             <div className="logo mt-2 mb-5">
               <p className='font-bold text-xl text-[#585757]'>COURSEPLUS</p>

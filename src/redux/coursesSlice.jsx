@@ -36,8 +36,8 @@ const coursesSlice = createSlice({
       if (index === -1) {
         let newCourseRegister = {
           ...action.payload,
-          giaHienTai: 599,
-          giaKhuyenMai: 399,
+          giaHienTai: 16999000,
+          giaKhuyenMai: 15999000,
         };
         newCoursesListRegister.push(newCourseRegister);
         state.coursesListRegister = newCoursesListRegister;
@@ -68,8 +68,8 @@ const coursesSlice = createSlice({
       if (index === -1) {
         let courseAddToCart = {
           ...action.payload,
-          giaHienTai: 599,
-          giaKhuyenMai: 399,
+          giaHienTai: 16999000,
+          giaKhuyenMai: 15999000,
         };
         newCourseAddToCart.push(courseAddToCart);
         state.coursesListRegister = newCourseAddToCart;

@@ -3,7 +3,7 @@ import { Carousel } from 'antd';
 import './Banner.css'
 export default function Banner() {
   return (
-    <div className='w-full ml-[20%]'>
+    <div className='w-full'>
     <Carousel autoplay>
     <div className=''>
       <figure className='banner-item hover:before:left-[125%] relative overflow-hidden cursor-pointer rounded-lg'>

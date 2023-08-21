@@ -105,12 +105,12 @@ export default function CourseListPage() {
       })
   }
   return (
-    <div className='grid grid-cols-12 overflow-hidden bg-[#f9fafb]'>
-      <div className="col-span-2 pt-[70px] bg-[#f9fafb] fixed top-0 w-[20%] border-r border-r-[#e5e7eb]">
+    <div className='h-max-content min-h-screen w-full bg-cover bg-white flex overflow-hidden'>
+      <div className="pt-[70px] fixed h-screen top-0 w-[20%] bg-white flex-shrink-0  border-r border-r-[#e5e7eb]">
         <NavBar />
       </div>
-      <div className="col-span-12 border-l border-l-[#e5e7eb]"> 
-      <div className='py-[105px] ml-[20%]'>
+      <div className="min-h-screen w-[80%] ml-auto"> 
+      <div className='py-[105px]'>
         <div className="grid lg:grid-cols-5 md:grid-cols-2 grid-cols-1 gap-3 container-90">
             {handleRenderListCourse()}
         </div>

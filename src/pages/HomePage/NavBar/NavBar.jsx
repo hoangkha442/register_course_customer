@@ -1,72 +1,80 @@
 import React, { useState } from 'react'
-import { HomeOutlined , BorderOuterOutlined, FolderOpenOutlined, PlayCircleOutlined, PayCircleOutlined, WechatOutlined, ExclamationCircleOutlined, UnorderedListOutlined, CreditCardOutlined, DownOutlined  } from '@ant-design/icons';
+import { HomeOutlined , UserAddOutlined, FolderOpenOutlined, PlayCircleOutlined,ShoppingCartOutlined, PayCircleOutlined, WechatOutlined, ExclamationCircleOutlined, UnorderedListOutlined, CreditCardOutlined, DownOutlined  } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { NavLink } from 'react-router-dom';
 import './NavBar.css';
-const items = [
-  {
-    label: <NavLink to='/'><span className='text-[15px] font-[500] tracking-wider text-[#585757]'>Home</span></NavLink>,
-    key: 'mail',
-    icon: <div className="rounded-md w-8 h-8 bg-gradient-to-tl from-[#c4b5fd] to-[#3b82f6] text-2xl justify-center"><HomeOutlined style={{fontSize: '16px', textAlign: 'center'}} className='text-white' /></div>,
-  },
-  {
-    label: <NavLink to='/course-list'><span className='text-[15px] font-[500] tracking-wider] text-[#585757]'>Courses</span></NavLink>,
-    key: 'Courses',
-    icon: <div className="rounded-md w-8 h-8 bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] text-2xl justify-center"><PlayCircleOutlined style={{fontSize: '18px', textAlign: 'center'}} className='text-white' /></div>,
-  },
-  {
-    label: <span className='text-[15px] font-[500] tracking-wider] text-[#585757]'>Categories</span>,
-    key: 'Categories',
-    icon: <div className="rounded-md w-8 h-8 bg-gradient-to-tl from-[#6ee7b7] to-[#10b981] text-2xl justify-center"><FolderOpenOutlined style={{fontSize: '18px', textAlign: 'center'}} className='text-white' /></div>,
-  },
-  {
-    label: <span className='text-[15px] font-[500] tracking-wider] text-[#585757]'>Route</span>,
-    key: 'Route',
-    icon: <div className="rounded-md w-8 h-8 bg-gradient-to-tl from-[#f9a8d4] to-[#ef4444] text-2xl justify-center"><BorderOuterOutlined style={{fontSize: '18px', textAlign: 'center'}} className='text-white' /></div>,
-  }
-];
-const pages = [
-  {
-    label: <span className='text-[15px] font-[500] tracking-wider text-[#585757]'>Pricing</span>,
-    key: 'Pricing',
-    icon: <div className="rounded-md w-8 h-8 text-2xl justify-center"><CreditCardOutlined  style={{fontSize: '18px', textAlign: 'center'}} className='text-[#585757] font-bold' /></div>,
-  },
-  {
-    label: <span className='text-[15px] font-[500] tracking-wider] text-[#585757]'>Help</span>,
-    key: 'Help',
-    icon: <div className="rounded-md w-8 h-8 text-2xl justify-center"><ExclamationCircleOutlined  style={{fontSize: '18px', textAlign: 'center'}} className='text-[#585757' /></div>,
-  },
-  {
-    label: <span className='text-[15px] font-[500] tracking-wider] text-[#585757]'>Faq</span>,
-    key: 'Faq',
-    icon: <div className="rounded-md w-8 h-8 text-2xl justify-center"><FolderOpenOutlined style={{fontSize: '18px', textAlign: 'center'}} className='text-[#585757]' /></div>,
-  },
-  {
-    label: <div className="flex justify-between items-center w-full">
-      <span className='text-[15px] font-[500] tracking-wider] text-[#585757]'>Forum</span>
-      <span className='text-[#11b981] bg-[#d1fae5] text-xs font-[500] px-2 py-1 rounded-3xl'>New</span>
-      </div>,
-    key: 'Forum',
-    icon: <div className="rounded-md w-8 h-8 text-2xl justify-center"><WechatOutlined  style={{fontSize: '18px', textAlign: 'center'}} className='text-[#585757]' /></div>,
-  },
-  {
-    label: <span className='text-[15px] font-[500] tracking-wider] text-[#585757]'>Cart list</span>,
-    key: 'CartList',
-    icon: <div className="rounded-md w-8 h-8 text-2xl justify-center"><UnorderedListOutlined  style={{fontSize: '18px', textAlign: 'center'}} className='text-[#585757]' /></div>,
-  },
-  {
-    label: <span className='text-[15px] font-[500] tracking-wider] text-[#585757]'>Payments</span>,
-    key: 'Payments',
-    icon: <div className="rounded-md w-8 h-8 text-2xl justify-center"><PayCircleOutlined style={{fontSize: '18px', textAlign: 'center'}} className='text-[#585757]' /></div>,
-  }
+import { useSelector } from 'react-redux';
 
-];
+
+
 export default function NavBar() {
   const [current, setCurrent] = useState('mail');
   const onClick = (e) => {
     console.log('click ', e);
     setCurrent(e.key);
   };
+  const user = useSelector((state) => { 
+    return state.userSlice.userInfo
+  });
+
+  const items = [
+    {
+      label: <NavLink to='/'><span className='text-[15px] font-[500] tracking-wider text-[#585757]'>Home</span></NavLink> ,
+      key: 'mail',
+      icon: <div className="rounded-md w-8 h-8 bg-gradient-to-tl from-[#c4b5fd] to-[#3b82f6] text-2xl justify-center"><HomeOutlined style={{fontSize: '16px', textAlign: 'center'}} className='text-white' /></div>,
+    },
+    {
+      label: <NavLink to='/course-list'><span className='text-[15px] font-[500] tracking-wider] text-[#585757]'>Courses</span></NavLink>,
+      key: 'Courses',
+      icon: <div className="rounded-md w-8 h-8 bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] text-2xl justify-center"><PlayCircleOutlined style={{fontSize: '18px', textAlign: 'center'}} className='text-white' /></div>,
+    },
+    {
+      label: <NavLink to='/check-out'><span className='text-[15px] font-[500] tracking-wider] text-[#585757]'>Cart</span></NavLink>,
+      key: 'Cart',
+      icon: <div className="rounded-md w-8 h-8 bg-gradient-to-tl from-[#f9a8d4] to-[#ef4444] text-2xl justify-center"><ShoppingCartOutlined  style={{fontSize: '18px', textAlign: 'center'}} className='text-white' /></div>,
+    },
+    {
+      label: <div className=""> {user ? <NavLink to='/profile'><span className='text-[15px] font-[500] tracking-wider text-[#585757]'>Account</span></NavLink> : <NavLink to='/login'><span className='text-[15px] font-[500] tracking-wider text-[#585757]'>Account</span></NavLink>}</div>,
+      key: 'Account',
+      icon: <div className="rounded-md w-8 h-8 bg-gradient-to-tl from-[#6ee7b7] to-[#10b981] text-2xl justify-center"><UserAddOutlined  style={{fontSize: '18px', textAlign: 'center'}} className='text-white' /></div>,
+    }
+  ];
+  const pages = [
+    {
+      label: <span className='text-[15px] font-[500] tracking-wider text-[#585757]'>Pricing</span>,
+      key: 'Pricing',
+      icon: <div className="rounded-md w-8 h-8 text-2xl justify-center"><CreditCardOutlined  style={{fontSize: '18px', textAlign: 'center'}} className='text-[#585757] font-bold' /></div>,
+    },
+    {
+      label: <span className='text-[15px] font-[500] tracking-wider] text-[#585757]'>Help</span>,
+      key: 'Help',
+      icon: <div className="rounded-md w-8 h-8 text-2xl justify-center"><ExclamationCircleOutlined  style={{fontSize: '18px', textAlign: 'center'}} className='text-[#585757' /></div>,
+    },
+    {
+      label: <span className='text-[15px] font-[500] tracking-wider] text-[#585757]'>Faq</span>,
+      key: 'Faq',
+      icon: <div className="rounded-md w-8 h-8 text-2xl justify-center"><FolderOpenOutlined style={{fontSize: '18px', textAlign: 'center'}} className='text-[#585757]' /></div>,
+    },
+    {
+      label: <div className="flex justify-between items-center w-full">
+        <span className='text-[15px] font-[500] tracking-wider] text-[#585757]'>Forum</span>
+        <span className='text-[#11b981] bg-[#d1fae5] text-xs font-[500] px-2 py-1 rounded-3xl'>New</span>
+        </div>,
+      key: 'Forum',
+      icon: <div className="rounded-md w-8 h-8 text-2xl justify-center"><WechatOutlined  style={{fontSize: '18px', textAlign: 'center'}} className='text-[#585757]' /></div>,
+    },
+    {
+      label: <span className='text-[15px] font-[500] tracking-wider] text-[#585757]'>Cart list</span>,
+      key: 'CartList',
+      icon: <div className="rounded-md w-8 h-8 text-2xl justify-center"><UnorderedListOutlined  style={{fontSize: '18px', textAlign: 'center'}} className='text-[#585757]' /></div>,
+    },
+    {
+      label: <span className='text-[15px] font-[500] tracking-wider] text-[#585757]'>Payments</span>,
+      key: 'Payments',
+      icon: <div className="rounded-md w-8 h-8 text-2xl justify-center"><PayCircleOutlined style={{fontSize: '18px', textAlign: 'center'}} className='text-[#585757]' /></div>,
+    }
+  
+  ];
   return (
     <div className="px-5 bg-white   scroll-bar scroll-smooth" style={{ overflowY: "scroll", height: '800' }}>
       <div className='mt-3 top-0  h-screen bg-white' >

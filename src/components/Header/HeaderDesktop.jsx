@@ -13,6 +13,7 @@ export default function HeaderDesktop() {
     return state.userSlice.userInfo
   })
   const handleLogout = () => { 
+    navigate('/login')
     Swal.fire({
       position: "center",
       icon: "success",
@@ -31,6 +32,7 @@ export default function HeaderDesktop() {
   const [showModalTailwind, setShowModalTailwind] = React.useState(false);
   return (
     <div className='fixed w-full z-50 bg-transparent backdrop-blur-[40px]'>
+      {/* {window.location.reload(true)} */}
       <div className="overla absolute w-full h-full blur-[40px]"></div>
       {user ? 
       <>
@@ -59,7 +61,7 @@ export default function HeaderDesktop() {
         <div className="flex items-center justify-end flex-1 h-[72px]" >
           <div className="flex items-center space-x-5">
             <button className='relative z-10'>
-              <div className="absolute -top-1 -right-3 w-5 h-5 leading-5 bg-gradient-to-r from-[#fcaa4d] to-[#ef4444] rounded-full text-white text-xs font-bold z-20 text-center align-middle">{listRegisterCourses.length}</div>
+              <div className="absolute -top-3 -right-3 w-5 h-5 leading-5 bg-gradient-to-r from-[#fcaa4d] to-[#ef4444] rounded-full text-white text-xs font-bold z-20 text-center align-middle">{listRegisterCourses.length}</div>
               <ShoppingCartOutlined className='text-2xl'/>
             </button>
             <button><MailOutlined className='text-2xl'/></button>
