@@ -22,14 +22,14 @@ export default function UserProfile() {
   console.log('value: ', value);
   // const [shouldReload, setShouldReload] = useState(true);
 
-  useEffect(() => {
-    if (value) {
-      // Thực hiện reload trang
-      window.location.reload();
-      // Đánh dấu là đã reload để không thực hiện lại
-      value(false);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (value) {
+  //     // Thực hiện reload trang
+  //     window.location.reload();
+  //     // Đánh dấu là đã reload để không thực hiện lại
+  //     value(false);
+  //   }
+  // }, []);
   const regexNumber = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$/;
   const regexName = /^(?=.*[a-zA-Z]).{1,20}$/;
   const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
