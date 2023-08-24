@@ -34,6 +34,9 @@ export default function CourseListPage() {
           console.log('err: ', err);
         })
   },[currentPage, sizeItem])
+  useEffect(() => { 
+    
+   }, [])
     // set ảnh lỗi sẽ loạt vào
   const handleErrorImage = () => {
     setFallbackImage(ImageError);

@@ -9,6 +9,7 @@ import Swal from 'sweetalert2'
 
 export default function HeaderDesktop() {
   const navigate = useNavigate()
+  const [searchItem, setSearchItem] = useState('')
   const user = useSelector((state) => { 
     return state.userSlice.userInfo
   })
@@ -29,6 +30,15 @@ export default function HeaderDesktop() {
    const listRegisterCourses = useSelector((state) => {
     return state.coursesSlice.coursesListRegister;
   });
+  const handleSearch = (event) => { 
+    event.preventDefault();
+    navigate(`/search?q=${searchItem}`)  
+  }
+  const handleOnchange = (event) => { 
+    let {value} = event.target
+    console.log('event.target: ', event.target.value);
+    setSearchItem(value)  
+  }
   const [showModalTailwind, setShowModalTailwind] = React.useState(false);
   return (
     <div className='fixed w-full z-50 bg-transparent backdrop-blur-[40px]'>
@@ -46,10 +56,12 @@ export default function HeaderDesktop() {
         </div>
         <div className="flex items-center justify-center flex-1 h-[72px]">
           <form
+            onSubmit={handleSearch}
             className="border-[#020d18] relative"
             id="searchCourses"
           >
             <input
+              onChange={handleOnchange}
               required
               className="font-[300] border-[2px] border-[#e8e8e8] rounded-3xl pr-24 pl-9 h-10 overflow-hidden  focus:outline-none"
               type="text"

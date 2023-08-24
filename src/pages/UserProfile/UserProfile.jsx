@@ -37,7 +37,6 @@ export default function UserProfile() {
   const onFinish = (values) => {
     const userProfile = {...values,maLoaiNguoiDung: 'HV',
     maNhom: "GP01", taiKhoan: user.taiKhoan}
-    console.log('userProfile: ', userProfile);
     UserService.putUserInfor(userProfile)
         .then((res) => {
           navigate('/login');

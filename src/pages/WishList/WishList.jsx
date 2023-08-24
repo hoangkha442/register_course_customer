@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Button, Card, Pagination } from "antd";
 import { NavLink } from "react-router-dom";
 import NavBar from "../HomePage/NavBar/NavBar";
+import { Button, Card, Pagination } from "antd";
 const { Meta } = Card;
 
 export default function WishList() {
