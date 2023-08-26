@@ -46,3 +46,7 @@
     color: #2a41e8 !important;
 
 }   
+
+.scroll-bar::-webkit-scrollbar{
+    width: 5px !important;
+}

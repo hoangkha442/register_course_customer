@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './SearchForm.css'
-import { Button, Modal } from 'antd'
+import { Button, Modal, message } from 'antd'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { userLocalStorage } from '../../services/LocalService'
@@ -72,12 +72,18 @@ export default function HeaderDesktop() {
         </div>
         <div className="flex items-center justify-end flex-1 h-[72px]" >
           <div className="flex items-center space-x-5">
-            <button className='relative z-10'>
-              <div className="absolute -top-3 -right-3 w-5 h-5 leading-5 bg-gradient-to-r from-[#fcaa4d] to-[#ef4444] rounded-full text-white text-xs font-bold z-20 text-center align-middle">{listRegisterCourses.length}</div>
+            <button onClick={() => { 
+              navigate('/check-out')
+             }} className='relative z-10'>
+              <div className="absolute -top-1 -right-3 w-5 h-5 leading-5 bg-gradient-to-r from-[#fcaa4d] to-[#ef4444] rounded-full text-white text-xs font-bold z-20 text-center align-middle">{listRegisterCourses.length}</div>
               <ShoppingCartOutlined className='text-2xl'/>
             </button>
-            <button><MailOutlined className='text-2xl'/></button>
-            <button><BellOutlined className='text-2xl'/></button>
+            <button onClick={() => { 
+              message.warning('Feature not updated!')
+             }}><MailOutlined className='text-2xl'/></button>
+            <button onClick={() => { 
+              message.warning('Feature not updated!')
+             }}><BellOutlined className='text-2xl'/></button>
             <div className="">
             <button type="primary" onClick={() => setShowModalTailwind(true)}>
               <img

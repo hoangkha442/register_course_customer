@@ -23,6 +23,9 @@
 .ant-card-meta-description {
     color: #c6ced5;
 }
+.movie-item{
+    transition: all 1s;
+}
 
 .movie-item::before{
     content: "";
@@ -33,9 +36,9 @@
     left: -100%;
     display: block;
     background: red;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 100%);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 100%);
     transform: skewX(-25deg);
-    transition: all 0.75s;
+    transition: all 0.5s;
 }
 .figcaption-btn{
     position: absolute;
@@ -65,4 +68,14 @@
 .bg-overlay{
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 6px !important;
+}
+
+.bg-overlay-popular{
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 6px !important;
+}
+
+.ant-btn:hover span,
+.ant-btn:hover i{
+    color: white !important;
 }

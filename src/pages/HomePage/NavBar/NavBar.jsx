@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
-import { HomeOutlined , UserAddOutlined, FolderOpenOutlined, PlayCircleOutlined,ShoppingCartOutlined, PayCircleOutlined, WechatOutlined, ExclamationCircleOutlined, UnorderedListOutlined, CreditCardOutlined, DownOutlined  } from '@ant-design/icons';
+import { HomeOutlined, HeartOutlined, UserAddOutlined, FolderOpenOutlined, PlayCircleOutlined,ShoppingCartOutlined, PayCircleOutlined, WechatOutlined, ExclamationCircleOutlined, UnorderedListOutlined, CreditCardOutlined, DownOutlined  } from '@ant-design/icons';
 import { Menu } from 'antd';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import './NavBar.css';
 import { useSelector } from 'react-redux';
 
-
-
 export default function NavBar() {
   const [current, setCurrent] = useState('mail');
+  const navigate = useNavigate()
   const onClick = (e) => {
     console.log('click ', e);
     setCurrent(e.key);
@@ -21,7 +20,7 @@ export default function NavBar() {
     {
       label: <NavLink to='/'><span className='text-[15px] font-[500] tracking-wider text-[#585757]'>Home</span></NavLink> ,
       key: 'mail',
-      icon: <div className="rounded-md w-8 h-8 bg-gradient-to-tl from-[#c4b5fd] to-[#3b82f6] text-2xl justify-center"><HomeOutlined style={{fontSize: '16px', textAlign: 'center'}} className='text-white' /></div>,
+      icon: <div className="rounded-md w-8 h-8 bg-gradient-to-tl from-[#f9a8d4] to-[#ef4444] text-2xl justify-center"><HomeOutlined style={{fontSize: '16px', textAlign: 'center'}} className='text-white' /></div>,
     },
     {
       label: <NavLink to='/course-list'><span className='text-[15px] font-[500] tracking-wider] text-[#585757]'>Courses</span></NavLink>,
@@ -31,13 +30,23 @@ export default function NavBar() {
     {
       label: <NavLink to='/check-out'><span className='text-[15px] font-[500] tracking-wider] text-[#585757]'>Cart</span></NavLink>,
       key: 'Cart',
-      icon: <div className="rounded-md w-8 h-8 bg-gradient-to-tl from-[#f9a8d4] to-[#ef4444] text-2xl justify-center"><ShoppingCartOutlined  style={{fontSize: '18px', textAlign: 'center'}} className='text-white' /></div>,
+      icon: <div className="rounded-md w-8 h-8 bg-gradient-to-tl from-[#c4b5fd] to-[#3b82f6] text-2xl justify-center"><ShoppingCartOutlined  style={{fontSize: '18px', textAlign: 'center'}} className='text-white' /></div>,
     },
     {
-      label: <div className=""> {user ? <NavLink to='/profile'><span className='text-[15px] font-[500] tracking-wider text-[#585757]'>Account</span></NavLink> : <NavLink to='/login'><span className='text-[15px] font-[500] tracking-wider text-[#585757]'>Account</span></NavLink>}</div>,
+      label: <div className=""> {user ? <button onClick={() => { 
+        setTimeout(() => {
+          navigate('/profile')
+          window.location.reload();
+        }, 500)
+       }}><span onClick={() => {  }} className='text-[15px] font-[500] tracking-wider text-[#585757]'>Account</span></button> : <NavLink to='/login'><span className='text-[15px] font-[500] tracking-wider text-[#585757]'>Account</span></NavLink>}</div>,
       key: 'Account',
       icon: <div className="rounded-md w-8 h-8 bg-gradient-to-tl from-[#6ee7b7] to-[#10b981] text-2xl justify-center"><UserAddOutlined  style={{fontSize: '18px', textAlign: 'center'}} className='text-white' /></div>,
-    }
+    },
+    {
+      label: <NavLink to='/wish-list/'><span className='text-[15px] font-[500] tracking-wider text-[#585757]'>Favorites</span></NavLink> ,
+      key: 'Favorites',
+      icon: <div className="rounded-md w-8 h-8 bg-gradient-to-tl from-[#f9a8d4] to-[#ef4444] text-2xl justify-center"><HeartOutlined style={{fontSize: '16px', textAlign: 'center'}} className='text-white' /></div>,
+    },
   ];
   const pages = [
     {
@@ -76,7 +85,7 @@ export default function NavBar() {
   
   ];
   return (
-    <div className="px-5 bg-white   scroll-bar scroll-smooth" style={{ overflowY: "scroll", height: '800' }}>
+    <div className="px-5 bg-white scroll-bar scroll-smooth scroll-navbar" style={{ overflowY: "scroll", height: '100%' }}>
       <div className='mt-3 top-0  h-screen bg-white' >
         <Menu className='my-2 bg-white' onClick={onClick} selectedKeys={[current]} items={items} />
         <div className="border-t" id='menu-2'>

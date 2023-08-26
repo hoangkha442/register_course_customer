@@ -6,30 +6,12 @@ import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import { UserService } from '../../services/UserService';
 import { userLocalStorage } from '../../services/LocalService';
-import useStickyState from "../../hooks/useStickyState";
 
-
-const { Option } = Select;
-const onFinishFailed = (errorInfo) => {
-  message.error(errorInfo)
-};
 export default function UserProfile() {
   const navigate = useNavigate()
   const user = useSelector((state) => { 
     return state.userSlice.userInfo
   });
-  const {value, setValue} = useStickyState(true, 'loading')
-  console.log('value: ', value);
-  // const [shouldReload, setShouldReload] = useState(true);
-
-  // useEffect(() => {
-  //   if (value) {
-  //     // Thực hiện reload trang
-  //     window.location.reload();
-  //     // Đánh dấu là đã reload để không thực hiện lại
-  //     value(false);
-  //   }
-  // }, []);
   const regexNumber = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$/;
   const regexName = /^(?=.*[a-zA-Z]).{1,20}$/;
   const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -62,6 +44,9 @@ export default function UserProfile() {
             timer: 1500,
           });
         });
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
   };
   return (
     <div className='h-max-content min-h-screen w-full bg-cover bg-white flex overflow-hidden relative'>
