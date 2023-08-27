@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import NavBar from '../HomePage/NavBar/NavBar'
 import { CoursesService } from '../../services/CoursesService'
 import { StarOutlined, StarFilled, StarTwoTone, UsergroupAddOutlined, PlayCircleOutlined, KeyOutlined, DownloadOutlined, QuestionCircleOutlined, SafetyCertificateOutlined, CheckOutlined, DownOutlined, UpOutlined } from '@ant-design/icons';
+import Swal from 'sweetalert2'
+import { setCourseAddToCart } from '../../redux/coursesSlice'
 
 export default function DetailPage() {
+    const navigate = useNavigate()
+    const dispatch = useDispatch();
     const {id} = useParams()
     const [detailCourse, setDetailCourse] = useState()
+    console.log('detailCourse: ', detailCourse);
     useEffect(() => { 
         CoursesService.getDetailCourses(id)
         .then((res) => { 
@@ -18,10 +23,38 @@ export default function DetailPage() {
             console.log('err: ', err);
         })
     },[id])
-    const navigate = useNavigate()
     const user = useSelector((state) => { 
         return state.userSlice.userInfo
     })
+    const handleAddToCart = () => {
+        if (user) {
+          CoursesService.postRegisterCourses({
+            maKhoaHoc: detailCourse.maKhoaHoc,
+            taiKhoan: user.taiKhoan,
+          })
+            .then((res) => {
+              dispatch(setCourseAddToCart(detailCourse));
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Added course to cart",
+                showConfirmButton: false,
+                timer: 1000,
+              });
+            })
+            .catch((err) => {
+              Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "The course is already in your cart",
+                showConfirmButton: false,
+                timer: 1000,
+              });
+            });
+        } else {
+          navigate("/login");
+        }
+      };
   return (
     <div className='grid grid-cols-12 overflow-hidden bg-[#f9fafb]'>
       <div className="col-span-2 pt-[70px] bg-[#f9fafb] fixed top-0 w-[20%] border-r border-r-[#e5e7eb]">
@@ -376,8 +409,12 @@ export default function DetailPage() {
                             <div className="flex items-center px-5 py-3 text-[#727374] text-base">  <SafetyCertificateOutlined className='mr-3 text-[18px]'/>Certificate of Completion </div>
                         </div>
                     </div>
-                <div className="mt-4">
-                    <a href="course-watch.html" className="flex items-center justify-center h-9 px-6 rounded-md bg-blue-600 text-white"> Enroll Now </a>
+                <div
+                onClick={() => {
+                    handleAddToCart();
+                  }}
+                className="mt-4 cursor-pointer">
+                    <a  className="flex items-center justify-center h-9 px-6 rounded-md bg-blue-600 text-white"> Add to Cart </a>
                 </div>
                 </div>
                 <div className="p-5 border border-[#e5e7eb] rounded-md bg-white"> 

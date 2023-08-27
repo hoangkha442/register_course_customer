@@ -1,6 +1,4 @@
 import { https } from "./Config";
-
-
 export const UserService = {
   postLogin: (data) => {
     return https.post("/api/QuanLyNguoiDung/DangNhap", data);

@@ -4,6 +4,13 @@ import { CoursesService } from "../../services/CoursesService";
 import { Button, Card, Pagination } from "antd";
 import NavBar from "../HomePage/NavBar/NavBar";
 import {
+  StarFilled,
+  CheckOutlined,
+  UsergroupAddOutlined,
+} from "@ant-design/icons";
+import { Tooltip } from "@material-tailwind/react";
+
+import {
   setCourseAddToCart,
   setCoursesListWishList,
 } from "../../redux/coursesSlice";
@@ -64,7 +71,7 @@ export default function Search() {
         })
         .catch((err) => {
           console.log("err: ", err);
-      });
+        });
     }
   }, [searchParams]);
   const listSearchCoursesValues = listCourses.filter((course) => {
@@ -75,7 +82,17 @@ export default function Search() {
   // khi không tìm thấy kết quả nào
   console.log("listSearchCoursesValues: ", listSearchCoursesValues);
   const renderNoResultSearch = () => {
-    return <h1>No result is found</h1>;
+    return (
+      <div className="container-90">
+        <p className="sm:text-3xl tracking-wider text-2xl font-bold title-font text-gray-900">Sorry, we couldn't find any results for "{searchParams.get("q")}"</p>
+        <p className="sm:text-xl text-base font-bold title-font text-gray-900 my-5">Try adjusting your search. Here are some ideas:</p>
+        <ul className="ml-5">
+          <li className='list-disc'>Make sure all words are spelled correctly</li>
+          <li className='list-disc'>Try different search terms</li>
+          <li className='list-disc'>Try more general search terms</li>
+        </ul>
+      </div>
+    );
   };
   return (
     <div className="">
@@ -85,51 +102,125 @@ export default function Search() {
         </div>
         <div className="min-h-screen w-[80%] ml-auto bg-[#f9fafb]">
           <div className="py-[105px]">
-            <div className="flex flex-col text-start w-full mb-14 container-90">
-              <h1 className="sm:text-4xl text-2xl font-bold title-font text-gray-900">
-                {listSearchCoursesValues.length} results for "
-                {searchParams.get("q")}"
-              </h1>
-              <p className="lg:w-2/3 mx-auto leading-relaxed text-base"></p>
-            </div>
+            
             {listSearchCoursesValues.length !== 0 ? (
-              <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-5 container-90">
+              <div className="container-90">
+                <div className="flex flex-col text-start w-full mb-5">
+                  <h1 className="sm:text-3xl tracking-wider text-2xl font-bold title-font text-gray-900">
+                    {listSearchCoursesValues.length} results for "
+                    {searchParams.get("q")}"
+                  </h1>
+                </div>
                 {listSearchCoursesValues.map((item) => {
                   return (
-                    <div>
+                    <div className="cursor-pointer">
                       <div
+                        className="flex space-x-5 py-5 border-b"
                         key={item.maKhoaHoc}
-                        className="shadow-sm bg-white rounded-md"
                       >
-                        <figure class="rounded-md movie-item hover:before:left-[125%] relative overflow-hidden cursor-pointe">
+                        <div onClick={() => { 
+                          navigate(`/detail/${item?.maKhoaHoc}`)
+                         }} className="w-64 h-36 flex-shrink-0 border">
                           <img
-                            className="w-[320px] cursor-pointer h-[175px] object-cover rounded-md"
+                            className="object-cover h-full w-full rounded-sm"
                             src={item.hinhAnh}
-                            alt={item.biDanh}
+                            alt={item.tenKhoaHoc}
                           />
-                          <NavLink to={`/detail/${item?.maKhoaHoc}`}>
-                            <figcaption className="overlay absolute left-0 bottom-0 w-full h-[100%] opacity-0 bg-overlay hover:opacity-100 transition-all duration-1000">
-                              <div className="figcaption-btn w-[80%] h-[30%]">
-                                <Button className="text-white border-none rounded-3xl bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] font-[500] hover:text-white uppercase flex items-center">
-                                  <span>view Detail</span>
-                                  <i class="fa fa-angle-right ml-1 text-[10px] mt-[2px] font-bold"></i>
-                                </Button>
+                        </div>
+                        <div onClick={() => { 
+                          navigate(`/detail/${item?.maKhoaHoc}`)
+                         }} className="text-base w-full">
+                          <Tooltip
+                            animate={{
+                              mount: { scale: 1, y: 0 },
+                              unmount: { scale: 0, y: 25 },
+                            }}
+                            placement="bottom-end"
+                            className="bg-white shadow-md"
+                            content={
+                              <div className="text-black">
+                                <p>What you’ll learn</p>
+                                <ul>
+                                  <li className="flex items-center">
+                                    <CheckOutlined className="mr-2" />
+                                    Skills that will allow you to apply for jobs
+                                    like: Web Developer, Software Developer,
+                                    Front End Developer, Javascript Developer,
+                                    and Full Stack Developer
+                                  </li>
+                                  <li className="flex items-center">
+                                    <CheckOutlined className="mr-2" />
+                                    Learn modern technologies that are ACTUALLY
+                                    being used behind tech companies in 2023
+                                  </li>
+                                  <li className="flex items-center">
+                                    <CheckOutlined className="mr-2" />
+                                    Build 10+ real world Web Development
+                                    projects you can show off
+                                  </li>
+                                </ul>
+                                <p class="font-semibold mt-1 text-[#2d2d2d]">
+                                  CREATED BY:
+                                  {item.nguoiTao.hoTen === null
+                                    ? "Incognito"
+                                    : item.nguoiTao.hoTen}
+                                </p>
+                                <p className="font-semibold mt-1 text-[#2d2d2d]">
+                                  DATE CREATE: {item.ngayTao}
+                                </p>
                               </div>
-                            </figcaption>
-                          </NavLink>
-                        </figure>
-                        <div className="rounded-md p-4">
-                          <p class="font-semibold line-clamp-2 text-[#666666]">
-                            {item.tenKhoaHoc}
-                          </p>
-                          <div className="flex space-x-2 items-center text-sm pt-1 text-[#666666]">
-                            <p>23 hours</p>
-                            <p>·</p>
-                            <p>40 lectures</p>
-                          </div>
-                          <div className="flex justify-between items-center  text-sm pt-1 text-[#727374]">
-                            <p className="font-[500]">Like</p>
-                            <div className="hover:text-red-600 transition-all duration-300 cursor-pointer">
+                            }
+                          >
+                            <div className="">
+                              <div className="flex items-center justify-between">
+                                <p className="font-semibold md:leading-relaxed md:text-[18px] text-[#2d2d2d]">
+                                  {item.tenKhoaHoc}
+                                </p>
+                                <div class="text-lg font-semibold text-[#2d2d2d]">
+                                  <p>₫15,999,000</p>
+                                </div>
+                              </div>
+                              <div className="flex justify-between my-1">
+                                <p className="md:block text-sm hidden text-[#2d2d2d] font-[300] pr-36">
+                                  {item.moTa.length > 80
+                                    ? item.moTa.slice(0, 100) + "..."
+                                    : item.moTa +
+                                      "Grafana from Basic to ADVANCE level; Complete Guide to Master DevOps Monitoring & Alerting"}
+                                </p>
+                                <div class="text-xs line-through font-semibold text-[#2d2d2d]">
+                                  <p>₫16,999,000</p>
+                                </div>
+                              </div>
+
+                              <div className="flex items-center space-x-3">
+                                <p className="font-semibold md:leading-relaxed text-base text-[#2d2d2d] flex items-center">
+                                  4.8
+                                  <div class="text-yellow-600 flex items-center ml-2">
+                                    <StarFilled />
+                                    <StarFilled />
+                                    <StarFilled />
+                                    <StarFilled />
+                                    <StarFilled />
+                                  </div>
+                                </p>
+                                <div className="flex items-center text-base text-[#2d2d2d]">
+                                  <UsergroupAddOutlined /> {item.luotXem}{" "}
+                                  Enerolled
+                                </div>
+                              </div>
+                              <div class="flex items-center justify-between">
+                                <div class="flex space-x-2 items-center text-sm pt-1 text-[#2d2d2d]">
+                                  <p>13 hours</p>
+                                  <p>·</p>
+                                  <p>32 lectures</p>
+                                  <p>·</p>
+                                  <p>All levels</p>
+                                </div>
+                              </div>
+                            </div>
+                          </Tooltip>
+                          <div className="mt-1 flex justify-end space-x-2">
+                            <div className="hover:text-red-600 text-[#666666] w-10 text-center leading-10 h-10 rounded-full hover:border-red-500  border transition-all duration-300 cursor-pointer">
                               <i
                                 class="fa fa-heart text-xl"
                                 onClick={() => {
@@ -137,13 +228,11 @@ export default function Search() {
                                 }}
                               />
                             </div>
-                          </div>
-                          <div className="mt-2">
                             <button
                               onClick={() => {
                                 handleAddToCart(item.maKhoaHoc, item);
                               }}
-                              className="text-white w-full text-center py-1 border-none rounded bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] hover:bg-gradient-to-tl hover:from-[#ef4444] hover:to-[#fcd34d] transition-all duration-500 font-[500] uppercase flex items-center justify-center"
+                              className="text-white text-center w-[20%] py-1 border-none rounded bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] hover:bg-gradient-to-tl hover:from-[#ef4444] hover:to-[#fcd34d] transition-all duration-500 font-[500] uppercase flex items-center justify-center"
                             >
                               <span className="hover:text-white text-[15px]">
                                 Add to cart

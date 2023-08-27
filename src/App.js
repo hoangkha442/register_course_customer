@@ -10,6 +10,7 @@ import CourseListPage from './pages/CourseListPage/CourseListPage';
 import CheckOut from './pages/CheckOut/CheckOut';
 import UserProfile from './pages/UserProfile/UserProfile';
 import Search from './pages/Search/Search';
+import CoursesOnCategory from './pages/HomePage/Categories/CoursesOnCategory';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path='/wish-list' element={<WishList />}/>
             <Route path='/check-out' element={<CheckOut />}/>
             <Route path='/profile' element={<UserProfile />}/>
+            <Route path='/caterogy/:maDanhMuc' element={<CoursesOnCategory />}/>
           </Route>
         </Routes>
       </Router>

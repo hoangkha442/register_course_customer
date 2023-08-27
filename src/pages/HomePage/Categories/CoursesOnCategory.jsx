@@ -1,22 +1,19 @@
 import React from "react";
+import { useEffect } from "react";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
+import NavBar from "../NavBar/NavBar";
+import { CoursesService } from "../../../services/CoursesService";
+import { useState } from "react";
+import { setCourseAddToCart, setCoursesListWishList } from "../../../redux/coursesSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
-import NavBar from "../HomePage/NavBar/NavBar";
-import { Button, Card, Pagination } from "antd";
-import { CoursesService } from "../../services/CoursesService";
+import { Button } from "antd";
 import Swal from "sweetalert2";
-import {
-  setCourseAddToCart,
-  setCoursesListWishList,
-} from "../../redux/coursesSlice";
-const { Meta } = Card;
 
-export default function WishList() {
-  const coursesWishLish = useSelector((state) => {
-    return state.coursesSlice.coursesListWishList;
-  });
+export default function CoursesOnCategory() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [courses, setCourses] = useState([])
+  let { maDanhMuc } = useParams();
   // dispatch courses wish list
   const user = useSelector((state) => {
     return state.userSlice.userInfo;
@@ -58,10 +55,19 @@ export default function WishList() {
       navigate("/login");
     }
   };
-  const renderWishList = () => {
-    return coursesWishLish.map((item, index) => {
-      return (
-        <div key={item.maKhoaHoc} className="shadow-sm bg-white rounded-md">
+  useEffect(() => {
+    CoursesService.getCourseOnCategory(maDanhMuc)
+    .then((res) => { 
+      setCourses(res.data)
+    })
+    .catch((err) => { 
+      console.log('err: ', err);
+    })
+  }, [maDanhMuc]);
+  const renderCourses = () => { 
+    return courses.map((item, index) => { 
+      return(
+        <div className="shadow-sm bg-white rounded-md">
           <figure class="rounded-md movie-item hover:before:left-[125%] relative overflow-hidden cursor-pointe">
             <img
               className="w-[320px] cursor-pointer h-[175px] object-cover rounded-md"
@@ -90,7 +96,7 @@ export default function WishList() {
             </div>
             <div className="flex justify-between items-center  text-sm pt-1 text-[#727374]">
               <p className="font-[500]">Like</p>
-              <div className="text-red-600 transition-all duration-300 cursor-pointer">
+              <div className=" hover:text-red-600 transition-all duration-300 cursor-pointer">
                 <i
                   class="fa fa-heart text-xl"
                   onClick={() => {
@@ -114,9 +120,9 @@ export default function WishList() {
             </div>
           </div>
         </div>
-      );
-    });
-  };
+      )
+    })
+   }
   return (
     <div className="">
       <div className="h-max-content min-h-screen w-full bg-cover bg-white flex overflow-hidden">
@@ -124,27 +130,12 @@ export default function WishList() {
           <NavBar />
         </div>
         <div className="min-h-screen w-[80%] ml-auto bg-[#f9fafb]">
-          <div className="py-[105px]">
-            {coursesWishLish.length === 0 ? (
-              <div className="container-90">
-                <p className="mb-8 text-4xl tracking-wider font-bold">Favorites List</p>
-                <p className="font-[500] mb-2">{coursesWishLish.length} Courses in favorites list</p>
-                <div className="shadow-md text-center bg-white">
-                  <div className="w-60 h-44 mx-auto text-center mb-9">
-                    <img className="h-full object-cover" src="/img/empty-shopping-cart-v2.jpg" alt="hinhAnh" />
-                  </div>
-                  <p className="mb-9">Your favorites list is empty. Keep shopping to find a course!</p>
-                  <button onClick={() => { 
-                    setTimeout(() => {
-                      navigate('/')
-                    }, 300);
-                   }} className="mb-20 font-[500] px-3 py-1 rounded-md bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] hover:bg-gradient-to-tl hover:from-[#ef4444] hover:to-[#fcd34d] text-base text-white">Keep Shopping</button>
-                </div>
-              </div>
-            ) : <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3 container-90">
-            {renderWishList()}
-          </div> }
-            
+          <div className="py-[105px] px-10">
+            <p className="mb-6 text-4xl tracking-wider font-bold">{maDanhMuc} Courses</p>
+            <p className="font-[500] mb-4">Courses to get you started</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 pl-3">
+              {renderCourses()}
+            </div>
           </div>
         </div>
       </div>

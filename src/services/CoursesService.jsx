@@ -15,6 +15,14 @@ export const CoursesService = {
       `/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc_PhanTrang?page=${currentPage}&pageSize=${sizePage}&MaNhom=GP01`
     );
   },
+  getCategory: () => { 
+    return https.get('/api/QuanLyKhoaHoc/LayDanhMucKhoaHoc')
+   }
+  ,  
+  getCourseOnCategory: (data) => { 
+    return https.get(`/api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${data}&MaNhom=GP01`)
+   }
+  ,
   postRegisterCourses: (data) => {
     return https.post("/api/QuanLyKhoaHoc/DangKyKhoaHoc", data);
   },

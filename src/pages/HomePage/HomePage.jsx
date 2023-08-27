@@ -2,6 +2,7 @@ import React from 'react'
 import NavBar from './NavBar/NavBar'
 import Banner from './Banner/Banner'
 import FeaturedClasses from './FeaturedClasses/FeaturedClasses'
+import Categories from './Categories/Categories'
 
 export default function HomePage() {
   return (
@@ -11,11 +12,12 @@ export default function HomePage() {
       </div>
       <div className="min-h-screen w-[80%] ml-auto">
         <Banner />
-        <div className="bg-[#f9fafb]">
+        <div className="bg-[#f9fafb]"  id='FeaturedClasses'>
           <div className="pb-14">
             <FeaturedClasses />
           </div>
         </div>
+        <Categories />
       </div>
     </div>
   )

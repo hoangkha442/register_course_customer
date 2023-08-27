@@ -127,26 +127,27 @@ export default function CheckOut() {
           <div className="min-h-screen w-[80%] ml-auto">
             <div className="py-[105px]">
               {listCoursesRegister.length == 0 ? (
-                <>
-                  <div className="flex flex-col text-center w-full mb-20">
-                    <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
-                      Checkout
-                    </h1>
-                    <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-                      Your shopping cart is empty!
-                    </p>
-                  </div>{" "}
-                </>
+                <div className="container-90">
+                <p className="mb-8 text-4xl tracking-wider font-bold">Shopping Cart</p>
+                <p className="font-[500] mb-2">{listCoursesRegister.length} Courses in cart</p>
+                <div className="shadow-md text-center bg-white">
+                  <div className="w-60 h-44 mx-auto text-center mb-9">
+                    <img className="h-full object-cover" src="/img/empty-shopping-cart-v2.jpg" alt="hinhAnh" />
+                  </div>
+                  <p className="mb-9">Your cart is empty. Keep shopping to find a course!</p>
+                  <button onClick={() => { 
+                    setTimeout(() => {
+                      navigate('/')
+                    }, 300);
+                   }} className="mb-20 font-[500] px-3 py-1 rounded-md bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] hover:bg-gradient-to-tl hover:from-[#ef4444] hover:to-[#fcd34d] text-base text-white">Keep Shopping</button>
+                </div>
+              </div>
               ) : (
                 <>
-                  <div className="flex flex-col text-center w-full mb-20">
-                    <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
-                      Checkout
-                    </h1>
-                    <p className="lg:w-2/3 mx-auto leading-relaxed text-base"></p>
-                  </div>
+                  
                   <div className="container-90">
-                    <p>{listCoursesRegister.length} courses in your cart</p>
+                  <p className="mb-8 text-4xl tracking-wider font-bold">Shopping Cart</p>
+                <p className="font-[500] mb-2">{listCoursesRegister.length} Courses in cart</p>
                     <div className="flex flex-wrap">
                       <div className="p-2 lg:w-2/3 w-full space-y-2">
                         {handleRenderCoursesCheckOut()}

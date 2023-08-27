@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { message } from 'antd';
-import { coursesListRegisterStorage } from '../services/LocalService';
+import { coursesListRegisterStorage, wishListStorage } from '../services/LocalService';
 
 const initialState = {
-  coursesListWishList: [],
+  coursesListWishList: wishListStorage.get(),
   coursesListRegister: coursesListRegisterStorage.get(),
 }
 
@@ -26,6 +26,7 @@ const coursesSlice = createSlice({
         message.success("Remove From WishList");
         state.coursesListWishList = newCoursesListWishList;
       }
+    wishListStorage.set(newCoursesListWishList)
     },
     // đăng kí ghi danh , danh sách khóa học
     setRegisterCoursesList: (state, action) => {

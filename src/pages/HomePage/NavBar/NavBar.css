@@ -30,7 +30,7 @@
     padding-right: 0 !important;
 }
 
-#menu-2 ul li:nth-child(4) .ant-menu-title-content{
+#menu-2 ul li:nth-child(3) .ant-menu-title-content{
     width: 85%;
     padding-right: 8px !important;
     padding-left: 0 !important;
@@ -44,7 +44,6 @@
 
 #menu-2 .ant-menu-item-selected span{
     color: #2a41e8 !important;
-
 }   
 
 .scroll-bar::-webkit-scrollbar{

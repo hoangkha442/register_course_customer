@@ -140,7 +140,7 @@ export default function UserProfile() {
                         }
                       ]}
                     >
-                      <Input placeholder={user.email} className="w-full px-4 py-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                      <Input placeholder={user.email} className="w-full px-4 py-2  bg-white border rounded-md  focus:outline-none focus:ring focus:ring-opacity-40"/>
                     </Form.Item>
                     {/* Phone  */}
                     <Form.Item
@@ -158,7 +158,7 @@ export default function UserProfile() {
                         }
                       ]}
                     >
-                      <Input placeholder={user.soDT} className="w-full px-4 py-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                      <Input placeholder={user.soDT} className="w-full px-4 py-2  bg-white border rounded-md focus:outline-none focus:ring focus:ring-opacity-40"/>
                     </Form.Item>
                     {/* Phone  */}
                     <Form.Item
@@ -166,13 +166,13 @@ export default function UserProfile() {
                       className='mb-2 hidden'
                       name="maLoaiNguoiDung"
                     >
-                      <input value='hocVien' disabled className="w-full px-4 py-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40" />
+                      <input value='hocVien' disabled className="w-full px-4 py-2 bg-white border rounded-md  focus:outline-none focus:ring focus:ring-opacity-40" />
                     </Form.Item>
                     {/* BUTTON */}
                     <Form.Item
                       className='mt-6'
                     >
-                      <button type='submit' className="font-[500] w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
+                      <button type='submit' className=" text-base w-full px-4 py-2 tracking-wide text-white font-bold transition-colors duration-200 transform bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] hover:from-[#ef4444] hover:to-[#fcd34d] rounded-md  focus:outline-none">
                         Update
                       </button>
                     </Form.Item>

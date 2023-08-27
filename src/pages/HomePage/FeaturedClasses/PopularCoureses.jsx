@@ -148,7 +148,7 @@ export default function PopularCoureses() {
     }
   };
   return (
-    <div>
+    <div id="popularCourses">
       <div class="sm:my-4 my-3 flex items-end justify-between pt-8">
         <h2 class="text-2xl font-semibold"> Popular Classes </h2>
         <NavLink to="/course-list">
