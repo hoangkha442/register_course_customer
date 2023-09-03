@@ -150,8 +150,11 @@ export default function CourseListPage() {
         <NavBar />
       </div>
       <div className="min-h-screen lg:w-[80%] ml-auto w-full">
-        <div className="py-[105px]">
-          <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 container-90">
+        <div className="py-[105px]  container-90">
+        <p className="mb-5 shadow-md text-center md:text-4xl text-3xl md:tracking-wider tracking-wide md:font-bold font-[600]">
+        All of the courses 
+                  </p>
+          <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
             {handleRenderListCourse()}
           </div>
           <div className="mt-4 text-center">

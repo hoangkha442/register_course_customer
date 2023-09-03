@@ -57,13 +57,13 @@ export default function DetailPage() {
       };
   return (
     <div className='grid grid-cols-12 overflow-hidden bg-[#f9fafb]'>
-      <div className="col-span-2 pt-[70px] bg-[#f9fafb] fixed top-0 w-[20%] border-r border-r-[#e5e7eb]">
+      <div className="col-span-2 lg:block hidden pt-[70px] bg-[#f9fafb] fixed top-0 w-[20%] border-r border-r-[#e5e7eb]">
         <NavBar />
       </div>
       <div className="col-span-12 border-l border-l-[#e5e7eb]">
-      <div className='pt-[105px] ml-[20%]'>
+      <div className='pt-[105px] lg:ml-[20%] ml-0'>
         {user ? 
-        <div className='container-80 pb-[70px]'>
+        <div className='lg:px-20 px-10 pb-[70px]'>
         <div className="bg-blue-600 md:rounded-b-lg md:-mt-8 md:pb-8 md:pt-12 p-8 z-10 relative overflow-hidden" style={{background: '#1877f2'}}>
             <div class="lg:w-9/12 relative z-20">
                 <div class="uppercase text-gray-200 mb-2 font-semibold text-sm">{detailCourse?.danhMucKhoaHoc?.tenDanhMucKhoaHoc}</div>

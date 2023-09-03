@@ -84,12 +84,18 @@ export default function Search() {
   const renderNoResultSearch = () => {
     return (
       <div className="container-90">
-        <p className="sm:text-3xl tracking-wider text-2xl font-bold title-font text-gray-900">Sorry, we couldn't find any results for "{searchParams.get("q")}"</p>
-        <p className="sm:text-xl text-base font-bold title-font text-gray-900 my-5">Try adjusting your search. Here are some ideas:</p>
+        <p className="sm:text-3xl tracking-wider text-2xl font-bold title-font text-gray-900">
+          Sorry, we couldn't find any results for "{searchParams.get("q")}"
+        </p>
+        <p className="sm:text-xl text-base font-bold title-font text-gray-900 my-5">
+          Try adjusting your search. Here are some ideas:
+        </p>
         <ul className="ml-5">
-          <li className='list-disc'>Make sure all words are spelled correctly</li>
-          <li className='list-disc'>Try different search terms</li>
-          <li className='list-disc'>Try more general search terms</li>
+          <li className="list-disc">
+            Make sure all words are spelled correctly
+          </li>
+          <li className="list-disc">Try different search terms</li>
+          <li className="list-disc">Try more general search terms</li>
         </ul>
       </div>
     );
@@ -117,16 +123,19 @@ export default function Search() {
                         className="lg:flex flex-row space-x-0 lg:space-y-0 space-y-5 lg:space-x-5 py-5 border-b"
                         key={item.maKhoaHoc}
                       >
-                        <div onClick={() => { 
-                          navigate(`/detail/${item?.maKhoaHoc}`)
-                         }} className="lg:w-64 w-full md:h-96 h-60 lg:h-36 flex-shrink-0 border">
+                        <div
+                          onClick={() => {
+                            navigate(`/detail/${item?.maKhoaHoc}`);
+                          }}
+                          className="lg:w-64 w-full md:h-96 h-60 lg:h-36 flex-shrink-0 border"
+                        >
                           <img
                             className="object-cover h-full w-full rounded-sm"
                             src={item.hinhAnh}
                             alt={item.tenKhoaHoc}
                           />
                         </div>
-                        <div  className="text-base w-full">
+                        <div className="text-base w-full">
                           <Tooltip
                             animate={{
                               mount: { scale: 1, y: 0 },
@@ -168,9 +177,12 @@ export default function Search() {
                               </div>
                             }
                           >
-                            <div onClick={() => { 
-                          navigate(`/detail/${item?.maKhoaHoc}`)
-                         }} className="">
+                            <div
+                              onClick={() => {
+                                navigate(`/detail/${item?.maKhoaHoc}`);
+                              }}
+                              className=""
+                            >
                               <div className="flex items-center justify-between">
                                 <p className="font-semibold md:leading-relaxed md:text-[18px] text-[#2d2d2d]">
                                   {item.tenKhoaHoc}
@@ -216,7 +228,7 @@ export default function Search() {
                                 </div>
                               </div>
                               <div className="flex space-x-3 items-center lg:hidden">
-                              <div class="text-lg font-semibold text-[#2d2d2d]">
+                                <div class="text-lg font-semibold text-[#2d2d2d]">
                                   <p>₫15,999,000</p>
                                 </div>
                                 <div class="text-xs  line-through font-semibold text-[#2d2d2d]">

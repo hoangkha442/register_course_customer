@@ -21,11 +21,11 @@ export default function WishList() {
   const user = useSelector((state) => {
     return state.userSlice.userInfo;
   });
-  useEffect(() => { 
-    if(!user){
-      navigate('/login')
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
     }
-   },[])
+  }, []);
   const handleAddToCart = (items, cart) => {
     if (user) {
       CoursesService.postRegisterCourses({
@@ -131,53 +131,57 @@ export default function WishList() {
         <div className="min-h-screen w-full lg:w-[80%] ml-auto bg-[#f9fafb]">
           <div className="py-[105px]">
             <div className="">
-            {user ? <>
-              {coursesWishLish.length === 0 ? (
-              <div className="container-90">
-                <p className="mb-8 text-4xl tracking-wider font-bold">
-                  Favorites List
-                </p>
-                <p className="font-[500] mb-2">
-                  {coursesWishLish.length} Courses in favorites list
-                </p>
-                <div className="shadow-md text-center bg-white">
-                  <div className="w-60 h-44 mx-auto text-center mb-9">
-                    <img
-                      className="h-full object-cover"
-                      src="/img/empty-shopping-cart-v2.jpg"
-                      alt="hinhAnh"
-                    />
-                  </div>
-                  <p className="mb-9">
-                    Your favorites list is empty. Keep shopping to find a
-                    course!
-                  </p>
-                  <button
-                    onClick={() => {
-                      setTimeout(() => {
-                        navigate("/");
-                      }, 300);
-                    }}
-                    className="mb-20 font-[500] px-3 py-1 rounded-md bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] hover:bg-gradient-to-tl hover:from-[#ef4444] hover:to-[#fcd34d] text-base text-white"
-                  >
-                    Keep Shopping
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div className=" container-90">
-                <p className="mb-1 text-4xl tracking-wider font-bold">
-                  Favorites List
-                </p>
-                <p className="font-[500] mb-2">
-                  {coursesWishLish.length} Courses in favorites list
-                </p>
-                <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 gap-3 mt-5">
-                  {renderWishList()}
-                </div>
-              </div>
-            )}
-            </> : <> {navigate('/login')}</>}
+              {user ? (
+                <>
+                  {coursesWishLish.length === 0 ? (
+                    <div className="container-90">
+                      <p className="mb-8 text-4xl tracking-wider font-bold">
+                        Favorites List
+                      </p>
+                      <p className="font-[500] mb-2">
+                        {coursesWishLish.length} Courses in favorites list
+                      </p>
+                      <div className="shadow-md text-center bg-white">
+                        <div className="w-60 h-44 mx-auto text-center mb-9">
+                          <img
+                            className="h-full object-cover"
+                            src="/img/empty-shopping-cart-v2.jpg"
+                            alt="hinhAnh"
+                          />
+                        </div>
+                        <p className="mb-9">
+                          Your favorites list is empty. Keep shopping to find a
+                          course!
+                        </p>
+                        <button
+                          onClick={() => {
+                            setTimeout(() => {
+                              navigate("/");
+                            }, 300);
+                          }}
+                          className="mb-20 font-[500] px-3 py-1 rounded-md bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] hover:bg-gradient-to-tl hover:from-[#ef4444] hover:to-[#fcd34d] text-base text-white"
+                        >
+                          Keep Shopping
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className=" container-90">
+                      <p className="mb-1 text-4xl tracking-wider font-bold">
+                        Favorites List
+                      </p>
+                      <p className="font-[500] mb-2">
+                        {coursesWishLish.length} Courses in favorites list
+                      </p>
+                      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 gap-3 mt-5">
+                        {renderWishList()}
+                      </div>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <> {navigate("/login")}</>
+              )}
             </div>
           </div>
         </div>

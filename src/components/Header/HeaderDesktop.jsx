@@ -249,10 +249,12 @@ export default function HeaderDesktop() {
                  }}>
                   <ShoppingCartOutlined className="text-2xl sm:block hidden"/>
                 </button>
-                <button onClick={() => { 
-                  navigate('/login')
-                 }}>
-                  <i class="text-xl fa fa-envelope text-black"></i>
+                <button
+                  onClick={() => {
+                    navigate("/login");
+                  }}
+                >
+                  <HeartOutlined className="text-2xl sm:block hidden" />
                 </button>
                 <button
                   onClick={() => {

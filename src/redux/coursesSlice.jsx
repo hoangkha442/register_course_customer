@@ -1,14 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { message } from 'antd';
-import { coursesListRegisterStorage, wishListStorage } from '../services/LocalService';
+import { createSlice } from "@reduxjs/toolkit";
+import { message } from "antd";
+import {
+  coursesListRegisterStorage,
+  wishListStorage,
+} from "../services/LocalService";
 
 const initialState = {
   coursesListWishList: wishListStorage.get(),
   coursesListRegister: coursesListRegisterStorage.get(),
-}
+};
 
 const coursesSlice = createSlice({
-  name: 'coursesSlice',
+  name: "coursesSlice",
   initialState,
   reducers: {
     setCoursesListWishList: (state, action) => {
@@ -19,14 +22,14 @@ const coursesSlice = createSlice({
       if (index == -1) {
         let newCourseWishList = { ...action.payload };
         newCoursesListWishList.push(newCourseWishList);
-        message.success("Add From WishList");
+        message.success("Add From Favorites list");
         state.coursesListWishList = newCoursesListWishList;
       } else {
         newCoursesListWishList.splice(index, 1);
-        message.success("Remove From WishList");
+        message.success("Remove From Favorites list");
         state.coursesListWishList = newCoursesListWishList;
       }
-    wishListStorage.set(newCoursesListWishList)
+      wishListStorage.set(newCoursesListWishList);
     },
     // đăng kí ghi danh , danh sách khóa học
     setRegisterCoursesList: (state, action) => {
@@ -79,9 +82,14 @@ const coursesSlice = createSlice({
       }
       coursesListRegisterStorage.set(newCourseAddToCart);
     },
-  }
+  },
 });
 
-export const {setCoursesListWishList, setRegisterCoursesList, setDeleteCoursesListRegister, setCourseAddToCart} = coursesSlice.actions
+export const {
+  setCoursesListWishList,
+  setRegisterCoursesList,
+  setDeleteCoursesListRegister,
+  setCourseAddToCart,
+} = coursesSlice.actions;
 
-export default coursesSlice.reducer
+export default coursesSlice.reducer;
