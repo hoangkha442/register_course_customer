@@ -11,6 +11,6 @@ export const UserService = {
   },
   putUserInfor: (data) => {
     return https.put("/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung", data);
-  }
+  },
 }
 

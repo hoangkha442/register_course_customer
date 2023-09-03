@@ -91,7 +91,7 @@ export default function CourseListPage() {
         <div className="shadow-sm bg-white rounded-md">
           <figure class="rounded-md movie-item hover:before:left-[125%] relative overflow-hidden cursor-pointe">
             <img
-              className="w-[320px] cursor-pointer h-[175px] object-cover rounded-md"
+              className="sm:w-[320px] w-full cursor-pointer h-[175px] object-cover rounded-md"
               src={item.hinhAnh}
               alt={item.biDanh}
             />
@@ -146,12 +146,12 @@ export default function CourseListPage() {
   };
   return (
     <div className="h-max-content min-h-screen w-full bg-cover bg-[#f9fafb] flex overflow-hidden">
-      <div className="pt-[70px] fixed h-screen top-0 w-[20%] bg-white flex-shrink-0  border-r border-r-[#e5e7eb]">
+      <div className="pt-[70px] lg:block hidden fixed h-screen top-0 w-[20%] bg-white flex-shrink-0  border-r border-r-[#e5e7eb]">
         <NavBar />
       </div>
-      <div className="min-h-screen w-[80%] ml-auto">
+      <div className="min-h-screen lg:w-[80%] ml-auto w-full">
         <div className="py-[105px]">
-          <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-5 container-90">
+          <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 container-90">
             {handleRenderListCourse()}
           </div>
           <div className="mt-4 text-center">

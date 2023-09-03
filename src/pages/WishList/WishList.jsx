@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import NavBar from "../HomePage/NavBar/NavBar";
@@ -21,6 +21,11 @@ export default function WishList() {
   const user = useSelector((state) => {
     return state.userSlice.userInfo;
   });
+  useEffect(() => { 
+    if(!user){
+      navigate('/login')
+    }
+   },[])
   const handleAddToCart = (items, cart) => {
     if (user) {
       CoursesService.postRegisterCourses({
@@ -120,31 +125,60 @@ export default function WishList() {
   return (
     <div className="">
       <div className="h-max-content min-h-screen w-full bg-cover bg-white flex overflow-hidden">
-        <div className="pt-[70px] fixed h-screen top-0 w-[20%] bg-white flex-shrink-0  border-r border-r-[#e5e7eb]">
+        <div className="pt-[70px] lg:block hidden fixed h-screen top-0 w-[20%] bg-white flex-shrink-0  border-r border-r-[#e5e7eb]">
           <NavBar />
         </div>
-        <div className="min-h-screen w-[80%] ml-auto bg-[#f9fafb]">
+        <div className="min-h-screen w-full lg:w-[80%] ml-auto bg-[#f9fafb]">
           <div className="py-[105px]">
-            {coursesWishLish.length === 0 ? (
+            <div className="">
+            {user ? <>
+              {coursesWishLish.length === 0 ? (
               <div className="container-90">
-                <p className="mb-8 text-4xl tracking-wider font-bold">Favorites List</p>
-                <p className="font-[500] mb-2">{coursesWishLish.length} Courses in favorites list</p>
+                <p className="mb-8 text-4xl tracking-wider font-bold">
+                  Favorites List
+                </p>
+                <p className="font-[500] mb-2">
+                  {coursesWishLish.length} Courses in favorites list
+                </p>
                 <div className="shadow-md text-center bg-white">
                   <div className="w-60 h-44 mx-auto text-center mb-9">
-                    <img className="h-full object-cover" src="/img/empty-shopping-cart-v2.jpg" alt="hinhAnh" />
+                    <img
+                      className="h-full object-cover"
+                      src="/img/empty-shopping-cart-v2.jpg"
+                      alt="hinhAnh"
+                    />
                   </div>
-                  <p className="mb-9">Your favorites list is empty. Keep shopping to find a course!</p>
-                  <button onClick={() => { 
-                    setTimeout(() => {
-                      navigate('/')
-                    }, 300);
-                   }} className="mb-20 font-[500] px-3 py-1 rounded-md bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] hover:bg-gradient-to-tl hover:from-[#ef4444] hover:to-[#fcd34d] text-base text-white">Keep Shopping</button>
+                  <p className="mb-9">
+                    Your favorites list is empty. Keep shopping to find a
+                    course!
+                  </p>
+                  <button
+                    onClick={() => {
+                      setTimeout(() => {
+                        navigate("/");
+                      }, 300);
+                    }}
+                    className="mb-20 font-[500] px-3 py-1 rounded-md bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] hover:bg-gradient-to-tl hover:from-[#ef4444] hover:to-[#fcd34d] text-base text-white"
+                  >
+                    Keep Shopping
+                  </button>
                 </div>
               </div>
-            ) : <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3 container-90">
-            {renderWishList()}
-          </div> }
-            
+            ) : (
+              <div className=" container-90">
+                <p className="mb-1 text-4xl tracking-wider font-bold">
+                  Favorites List
+                </p>
+                <p className="font-[500] mb-2">
+                  {coursesWishLish.length} Courses in favorites list
+                </p>
+                <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 gap-3 mt-5">
+                  {renderWishList()}
+                </div>
+              </div>
+            )}
+            </> : <> {navigate('/login')}</>}
+            </div>
           </div>
         </div>
       </div>

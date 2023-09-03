@@ -18,18 +18,18 @@ export default function Categories() {
       });
   }, []);
   return (
-    <div id="categories" className="container-80 py-[55px]">
+    <div id="categories" className="lg:w-[80%] mx-auto w-[90%] py-[55px]">
       <h2 class="text-2xl font-semibold mb-5"> Categories </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pl-3">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 pl-3">
         <div
           onClick={() => {
             navigate("/caterogy/BackEnd");
           }}
           className="cursor-pointer"
         >
-          <div className="w-72 h-72 max-w-xs overflow-hidden bg-cover bg-no-repeat">
+          <div className="w-full md:h-72 h-48 max-w-xs overflow-hidden bg-cover bg-no-repeat">
             <img
-              className="object-cover h-full rounded-md max-w-xs transition duration-300 ease-in-out hover:scale-110"
+              className="object-cover w-full h-full rounded-md max-w-xs transition duration-300 ease-in-out hover:scale-110"
               src="/img/caterogy1.jpg"
               alt="hinhAnh"
             />
@@ -42,9 +42,9 @@ export default function Categories() {
           }}
           className="cursor-pointer"
         >
-          <div className="w-72 h-72 max-w-xs overflow-hidden bg-cover bg-no-repeat">
+          <div className="w-full md:h-72 h-48 max-w-xs overflow-hidden bg-cover bg-no-repeat">
             <img
-              className="object-cover h-full rounded-md max-w-xs transition duration-300 ease-in-out hover:scale-110"
+              className="object-cover w-full h-full rounded-md max-w-xs transition duration-300 ease-in-out hover:scale-110"
               src="/img/caterogy2.jpg"
               alt="hinhAnh"
             />
@@ -57,9 +57,9 @@ export default function Categories() {
           }}
           className="cursor-pointer"
         >
-          <div className="w-72 h-72 max-w-xs overflow-hidden bg-cover bg-no-repeat">
+          <div className="w-full md:h-72 h-48 max-w-xs overflow-hidden bg-cover bg-no-repeat">
             <img
-              className="object-cover h-full rounded-md max-w-xs transition duration-300 ease-in-out hover:scale-110"
+              className="object-cover w-full h-full rounded-md max-w-xs transition duration-300 ease-in-out hover:scale-110"
               src="/img/caterogy3.jpg"
               alt="hinhAnh"
             />
@@ -74,9 +74,9 @@ export default function Categories() {
           }}
           className="cursor-pointer"
         >
-          <div className="w-72 h-72 max-w-xs overflow-hidden bg-cover bg-no-repeat">
+          <div className="w-full md:h-72 h-48 max-w-xs overflow-hidden bg-cover bg-no-repeat">
             <img
-              className="object-cover h-full rounded-md max-w-xs transition duration-300 ease-in-out hover:scale-110"
+              className="object-cover h-full w-full rounded-md max-w-xs transition duration-300 ease-in-out hover:scale-110"
               src="/img/caterogy4.jpg"
               alt="hinhAnh"
             />
@@ -89,9 +89,9 @@ export default function Categories() {
           }}
           className="cursor-pointer"
         >
-          <div className="w-72 h-72 max-w-xs overflow-hidden bg-cover bg-no-repeat">
+          <div className="w-full md:h-72 h-48 max-w-xs overflow-hidden bg-cover bg-no-repeat">
             <img
-              className="object-cover h-full rounded-md max-w-xs transition duration-300 ease-in-out hover:scale-110"
+              className="object-cover h-full w-full rounded-md max-w-xs transition duration-300 ease-in-out hover:scale-110"
               src="/img/caterogy5.jpg"
               alt="hinhAnh"
             />
@@ -104,9 +104,9 @@ export default function Categories() {
           }}
           className="cursor-pointer"
         >
-          <div className="w-72 h-72 max-w-xs overflow-hidden bg-cover bg-no-repeat">
+          <div className="w-full md:h-72 h-48 max-w-xs overflow-hidden bg-cover bg-no-repeat">
             <img
-              className="object-cover h-full rounded-md max-w-xs transition duration-300 ease-in-out hover:scale-110"
+              className="object-cover w-full h-full rounded-md max-w-xs transition duration-300 ease-in-out hover:scale-110"
               src="/img/caterogy6.jpg"
               alt="hinhAnh"
             />

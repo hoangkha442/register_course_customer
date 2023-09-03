@@ -17,7 +17,7 @@ export default function UserProfile() {
   const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   const regexPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+{};:,<.>/?]).{1,20}$/;
   const onFinish = (values) => {
-    const userProfile = {...values,maLoaiNguoiDung: 'HV',
+    const userProfile = {...values,maLoaiNguoiDung: 'GV',
     maNhom: "GP01", taiKhoan: user.taiKhoan}
     UserService.putUserInfor(userProfile)
         .then((res) => {
@@ -51,14 +51,14 @@ export default function UserProfile() {
   return (
     <div className='h-max-content min-h-screen w-full bg-cover bg-white flex overflow-hidden relative'>
         <div className="absolute w-full h-full bg-[#e5e7eb]"></div>
-          <div className="pt-[70px] fixed h-screen top-0 w-[20%] bg-white flex-shrink-0  border-r border-r-[#e5e7eb]">
+          <div className="pt-[70px] lg:block hidden fixed h-screen top-0 w-[20%] bg-white flex-shrink-0  border-r border-r-[#e5e7eb]">
             <NavBar />
           </div>
-          <div className="min-h-screen w-[80%] ml-auto"> 
+          <div className="min-h-screen lg:w-[80%] w-full ml-auto"> 
             <div className='py-[90px]'>
             <div className="container-80">
               <div className="relative flex flex-col justify-cente overflow-hidden">
-                <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl md:max-w-lg">
+                <div className="w-full lg:mt-0 mt-10 p-6 m-auto bg-white rounded-md shadow-xl md:max-w-lg">
                   <h1 className="text-3xl mt-4 font-semibold text-center text-black">
                     Profile & Settings
                   </h1>

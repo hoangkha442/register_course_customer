@@ -7,8 +7,8 @@ export const CoursesService = {
   ,getCoursesListPopular: () => {
     return https.get(`/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP01`);
   },
-  getDetailCourses: (id) => {
-    return https.get(`/api/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=${id}`);
+  getDetailCourses: (value) => {
+    return https.get(`/api/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=${value}`);
   },
   getCourseListPagination: (currentPage, sizePage) => {
     return https.get(

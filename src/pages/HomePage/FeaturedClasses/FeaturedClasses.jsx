@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { CoursesService } from '../../../services/CoursesService'
 import PopularCoureses from './PopularCoureses'
-
+import { StarFilled} from '@ant-design/icons'
+import { NavLink } from 'react-router-dom'
 export default function FeaturedClasses() {
   const [featureCourses, setFeatureCourses] = useState([])
   useEffect(() => { 
@@ -16,16 +17,18 @@ export default function FeaturedClasses() {
   const renderFeatureCourses = () => { 
     return featureCourses.slice(4,5).map((item, index) =>{
       return(
-        <div key={item.biDanh} className="grid grid-cols-12 gap-3 rounded-md bg-white shadow-sm cursor-pointer">
-          <div className="img col-span-4 rounded-md">
+        <NavLink to={`/detail/${item.maKhoaHoc}`}>
+          <div key={item.biDanh} className="grid grid-cols-12 gap-3 rounded-md bg-white shadow-sm cursor-pointer">
+          <div className="img col-span-12 sm:col-span-4 rounded-md">
             <img className='w-full h-full object-cover rounded-md' src='./img/feaure1.jpg' alt={item.biDanh} />
           </div>
-          <div className="col-span-8 p-6">
+          <div className="col-span-12 sm:col-span-8 p-2 sm:p-6">
             <p className='line-clamp-2 font-semibold md:leading-relaxed md:text-xl text-[#666666]'>{item.danhMucKhoaHoc.tenDanhMucKhoaHoc}</p>
             <p className='mt-2 md:block hidden text-[#666666] font-[300]'>{item.moTa.length > 80 ? item.moTa.slice(0,70) + '...' : item.moTa}</p>
-            <p className='font-semibold mt-3 text-[#666666]'>{item.nguoiTao.hoTen}</p>
+            <p className='md:font-semibold font-light mt-1 sm:mt-3 text-[#666666]'>{item.nguoiTao.hoTen}</p>
+            <p className='sm:hidden line-clamp-2 font-semibold md:leading-relaxed md:text-xl text-[#666666] flex items-center'>5.0 <StarFilled className='ml-1 text-yellow-500'/> <StarFilled  className='text-yellow-500'/> <StarFilled  className='text-yellow-500'/> <StarFilled  className='text-yellow-500'/> <StarFilled  className='text-yellow-500'/></p>
             <div className="flex items-center justify-between">
-              <div className="flex space-x-2 items-center text-sm pt-2 text-[#666666]">
+              <div className="flex space-x-2 flex-wrap items-center text-sm pt-2 text-[#666666]">
                 <p>13 hours</p>
                 <p>·</p>
                 <p>32 lectures</p>
@@ -36,11 +39,12 @@ export default function FeaturedClasses() {
             </div>
           </div>
         </div>
+        </NavLink>
       )
     })
    }
   return (
-    <div className='container-80 py-3'>
+    <div className='lg:w-[80%] w-[90%] mx-auto py-3'>
       <div class="sm:my-4 my-3 flex items-end justify-between pt-3">
         <h2 class="text-2xl font-semibold">Featured Classes</h2> 
       </div>

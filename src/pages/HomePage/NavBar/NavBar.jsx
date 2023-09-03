@@ -285,7 +285,6 @@ export default function NavBar() {
                 Development
               </p>
               <span>
-                {" "}
                 <DownOutlined
                   style={{ fontSize: "14px", textAlign: "center" }}
                   className="text-[#585757] font-bold"

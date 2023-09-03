@@ -1,6 +1,6 @@
 import { Form, Input, message } from 'antd';
-import React from 'react'
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { UserService } from '../../services/UserService';
 import { setLogin } from '../../redux/userSlice';
@@ -43,6 +43,14 @@ export default function LoginPage() {
   };
   let navigate = useNavigate()
   let dispatch = useDispatch()
+  const user = useSelector((state) => { 
+    return state.userSlice.userInfo
+   })
+   useEffect(() => { 
+    if(user){
+      navigate('/')
+    }
+    })
   return (
   <div className='relative h-max-content min-h-screen w-full bg-cover bg-white flex overflow-hidden'>
     <div className="absolute w-full h-full bg-[#e5e7eb]"></div>
@@ -94,7 +102,6 @@ export default function LoginPage() {
                 >
                   <Input className="w-full px-4 py-2 text-gray-900 bg-white border rounded-md "/>
                 </Form.Item>
-
                 <Form.Item
                   label="Password"
                   className='mb-2'
@@ -122,7 +129,6 @@ export default function LoginPage() {
                   </button>
                 </Form.Item>
               </Form>
-
               <p className="mt-8 text-xs font-light text-center text-gray-700">
                 Don't have an account?
                 <NavLink

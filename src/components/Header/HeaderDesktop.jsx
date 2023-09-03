@@ -107,13 +107,6 @@ export default function HeaderDesktop() {
                 >
                   <HeartOutlined className="text-2xl" />
                 </button>
-                <button
-                  onClick={() => {
-                    message.warning("Feature not updated!");
-                  }}
-                >
-                  <BellOutlined className="text-2xl" />
-                </button>
                 <div className="">
                   <button
                     type="primary"
@@ -234,10 +227,15 @@ export default function HeaderDesktop() {
               </a>
             </div>
             <div className="flex items-center justify-center flex-1">
-              <form className="border-[#020d18] relative" id="searchCourses">
+            <form
+                onSubmit={handleSearch}
+                className="border-[#020d18] relative"
+                id="searchCourses"
+              >
                 <input
+                  onChange={handleOnchange}
                   required
-                  className="font-[300] border-[2px] border-[#e8e8e8] rounded-3xl pr-20 pl-10 h-10 overflow-hidden active:bg-[#e8e8e8] focus:outline-none"
+                  className="font-[300] border-[2px] border-[#e8e8e8] rounded-3xl pr-24 pl-9 h-10 overflow-hidden  focus:outline-none"
                   type="text"
                   placeholder=" Quick search for anything.."
                 />
@@ -246,14 +244,15 @@ export default function HeaderDesktop() {
             </div>
             <div className="flex items-center justify-end flex-1">
               <div className="flex items-center space-x-5">
-                <button>
-                  <i class="text-xl fa-solid fa-cart-shopping text-black"></i>
+                <button onClick={() => { 
+                  navigate('/login')
+                 }}>
+                  <ShoppingCartOutlined className="text-2xl sm:block hidden"/>
                 </button>
-                <button>
+                <button onClick={() => { 
+                  navigate('/login')
+                 }}>
                   <i class="text-xl fa fa-envelope text-black"></i>
-                </button>
-                <button>
-                  <i class="text-xl fa fa-bell text-black"></i>
                 </button>
                 <button
                   onClick={() => {

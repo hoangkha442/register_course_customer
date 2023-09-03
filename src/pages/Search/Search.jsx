@@ -97,12 +97,11 @@ export default function Search() {
   return (
     <div className="">
       <div className="h-max-content min-h-screen w-full bg-cover bg-white flex overflow-hidden">
-        <div className="pt-[70px] fixed h-screen top-0 w-[20%] bg-white flex-shrink-0  border-r border-r-[#e5e7eb]">
+        <div className="pt-[70px] lg:block hidden fixed h-screen top-0 w-[20%] bg-white flex-shrink-0  border-r border-r-[#e5e7eb]">
           <NavBar />
         </div>
-        <div className="min-h-screen w-[80%] ml-auto bg-[#f9fafb]">
+        <div className="min-h-screen w-full lg:w-[80%] ml-auto bg-[#f9fafb]">
           <div className="py-[105px]">
-            
             {listSearchCoursesValues.length !== 0 ? (
               <div className="container-90">
                 <div className="flex flex-col text-start w-full mb-5">
@@ -115,21 +114,19 @@ export default function Search() {
                   return (
                     <div className="cursor-pointer">
                       <div
-                        className="flex space-x-5 py-5 border-b"
+                        className="lg:flex flex-row space-x-0 lg:space-y-0 space-y-5 lg:space-x-5 py-5 border-b"
                         key={item.maKhoaHoc}
                       >
                         <div onClick={() => { 
                           navigate(`/detail/${item?.maKhoaHoc}`)
-                         }} className="w-64 h-36 flex-shrink-0 border">
+                         }} className="lg:w-64 w-full md:h-96 h-60 lg:h-36 flex-shrink-0 border">
                           <img
                             className="object-cover h-full w-full rounded-sm"
                             src={item.hinhAnh}
                             alt={item.tenKhoaHoc}
                           />
                         </div>
-                        <div onClick={() => { 
-                          navigate(`/detail/${item?.maKhoaHoc}`)
-                         }} className="text-base w-full">
+                        <div  className="text-base w-full">
                           <Tooltip
                             animate={{
                               mount: { scale: 1, y: 0 },
@@ -138,7 +135,7 @@ export default function Search() {
                             placement="bottom-end"
                             className="bg-white shadow-md"
                             content={
-                              <div className="text-black">
+                              <div className="text-black p-5">
                                 <p>What you’ll learn</p>
                                 <ul>
                                   <li className="flex items-center">
@@ -171,12 +168,14 @@ export default function Search() {
                               </div>
                             }
                           >
-                            <div className="">
+                            <div onClick={() => { 
+                          navigate(`/detail/${item?.maKhoaHoc}`)
+                         }} className="">
                               <div className="flex items-center justify-between">
                                 <p className="font-semibold md:leading-relaxed md:text-[18px] text-[#2d2d2d]">
                                   {item.tenKhoaHoc}
                                 </p>
-                                <div class="text-lg font-semibold text-[#2d2d2d]">
+                                <div class="text-lg lg:block hidden font-semibold text-[#2d2d2d]">
                                   <p>₫15,999,000</p>
                                 </div>
                               </div>
@@ -187,11 +186,10 @@ export default function Search() {
                                     : item.moTa +
                                       "Grafana from Basic to ADVANCE level; Complete Guide to Master DevOps Monitoring & Alerting"}
                                 </p>
-                                <div class="text-xs line-through font-semibold text-[#2d2d2d]">
+                                <div class="text-xs lg:block hidden  line-through font-semibold text-[#2d2d2d]">
                                   <p>₫16,999,000</p>
                                 </div>
                               </div>
-
                               <div className="flex items-center space-x-3">
                                 <p className="font-semibold md:leading-relaxed text-base text-[#2d2d2d] flex items-center">
                                   4.8
@@ -217,9 +215,17 @@ export default function Search() {
                                   <p>All levels</p>
                                 </div>
                               </div>
+                              <div className="flex space-x-3 items-center lg:hidden">
+                              <div class="text-lg font-semibold text-[#2d2d2d]">
+                                  <p>₫15,999,000</p>
+                                </div>
+                                <div class="text-xs  line-through font-semibold text-[#2d2d2d]">
+                                  <p>₫16,999,000</p>
+                                </div>
+                              </div>
                             </div>
                           </Tooltip>
-                          <div className="mt-1 flex justify-end space-x-2">
+                          <div className="lg:mt-1 mt-3  flex justify-end space-x-2">
                             <div className="hover:text-red-600 text-[#666666] w-10 text-center leading-10 h-10 rounded-full hover:border-red-500  border transition-all duration-300 cursor-pointer">
                               <i
                                 class="fa fa-heart text-xl"
@@ -232,7 +238,7 @@ export default function Search() {
                               onClick={() => {
                                 handleAddToCart(item.maKhoaHoc, item);
                               }}
-                              className="text-white text-center w-[20%] py-1 border-none rounded bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] hover:bg-gradient-to-tl hover:from-[#ef4444] hover:to-[#fcd34d] transition-all duration-500 font-[500] uppercase flex items-center justify-center"
+                              className="text-white text-center w-full lg:w-[20%] py-1 border-none rounded bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] hover:bg-gradient-to-tl hover:from-[#ef4444] hover:to-[#fcd34d] transition-all duration-500 font-[500] uppercase flex items-center justify-center"
                             >
                               <span className="hover:text-white text-[15px]">
                                 Add to cart

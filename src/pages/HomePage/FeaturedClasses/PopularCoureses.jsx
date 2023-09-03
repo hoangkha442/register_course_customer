@@ -39,7 +39,7 @@ export default function PopularCoureses() {
           <figure class="rounded-md movie-item hover:before:left-[125%] relative overflow-hidden cursor-pointe">
             <div className="img col-span-4 rounded-md">
               <img
-                className="w-[320px] h-[175px] object-cover rounded-md"
+                className="w-full lg:w-[320px] h-[175px] object-cover rounded-md"
                 src={item.hinhAnh}
                 alt={item.biDanh}
               />
@@ -157,7 +157,7 @@ export default function PopularCoureses() {
           </a>
         </NavLink>
       </div>
-      <div className="grid grid-cols-3 gap-5 pl-3">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-5 pl-3">
         {renderPopularCoureses()}
       </div>
     </div>

@@ -25,7 +25,7 @@ export default function CheckOut() {
       return (
         <div className="" key={index}>
           <section className="text-gray-600 bg-white">
-            <div className="h-full flex items-center shadow-sm border p-4 rounded-lg">
+            <div className="h-full flex flex-wrap items-center shadow-sm border p-4 rounded-lg">
               <img
                 alt="team"
                 className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
@@ -40,7 +40,7 @@ export default function CheckOut() {
                   {item.luotXem} Lectures
                 </h2>
               </div>
-              <div className="flex-grow text-end">
+              <div className="flex-grow sm:mt-0 mt-3 text-end">
                 <div className="">
                   <span className="line-through mr-2 font-[500]">
                     {item.giaHienTai.toLocaleString()}
@@ -121,10 +121,10 @@ export default function CheckOut() {
         <NavLink to="/login"></NavLink>
       ) : (
         <div className="h-max-content min-h-screen w-full bg-cover flex overflow-hidden bg-[#f9fafb]">
-          <div className="pt-[70px] fixed h-screen top-0 w-[20%] bg-white flex-shrink-0  border-r border-r-[#e5e7eb]">
+          <div className="pt-[70px] lg:block hidden fixed h-screen top-0 w-[20%] bg-white flex-shrink-0  border-r border-r-[#e5e7eb]">
             <NavBar />
           </div>
-          <div className="min-h-screen w-[80%] ml-auto">
+          <div className="min-h-screen lg:w-[80%] w-full ml-auto">
             <div className="py-[105px]">
               {listCoursesRegister.length == 0 ? (
                 <div className="container-90">
