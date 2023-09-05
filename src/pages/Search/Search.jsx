@@ -62,7 +62,7 @@ export default function Search() {
       navigate("/login");
     }
   };
-  // console.log('searchParams: ', searchParams.get('q'));
+
   useEffect(() => {
     if (searchParams.get("q")) {
       CoursesService.getCoursesListPopular()
@@ -80,7 +80,6 @@ export default function Search() {
       .includes(searchParams.get("q").toLowerCase());
   });
   // khi không tìm thấy kết quả nào
-  console.log("listSearchCoursesValues: ", listSearchCoursesValues);
   const renderNoResultSearch = () => {
     return (
       <div className="container-90">

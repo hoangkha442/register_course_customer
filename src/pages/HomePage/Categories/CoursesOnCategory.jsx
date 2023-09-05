@@ -70,7 +70,7 @@ export default function CoursesOnCategory() {
         <div className="shadow-sm bg-white rounded-md">
           <figure class="rounded-md movie-item hover:before:left-[125%] relative overflow-hidden cursor-pointe">
             <img
-              className="w-[320px] cursor-pointer h-[175px] object-cover rounded-md"
+              className="sm:w-[320px] w-full cursor-pointer h-[175px] object-cover rounded-md"
               src={item.hinhAnh}
               alt={item.biDanh}
             />
@@ -126,10 +126,10 @@ export default function CoursesOnCategory() {
   return (
     <div className="">
       <div className="h-max-content min-h-screen w-full bg-cover bg-white flex overflow-hidden">
-        <div className="pt-[70px] fixed h-screen top-0 w-[20%] bg-white flex-shrink-0  border-r border-r-[#e5e7eb]">
+        <div className="pt-[70px] lg:block hidden fixed h-screen top-0 w-[20%] bg-white flex-shrink-0  border-r border-r-[#e5e7eb]">
           <NavBar />
         </div>
-        <div className="min-h-screen w-[80%] ml-auto bg-[#f9fafb]">
+        <div className="min-h-screen w-full lg:w-[80%] ml-auto bg-[#f9fafb]">
           <div className="py-[105px] px-10">
             <p className="mb-6 text-4xl tracking-wider font-bold">{maDanhMuc} Courses</p>
             <p className="font-[500] mb-4">Courses to get you started</p>
