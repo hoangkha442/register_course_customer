@@ -46,7 +46,7 @@ export default function HeaderDesktop() {
   };
   const [showModalTailwind, setShowModalTailwind] = React.useState(false);
   return (
-    <div className="fixed w-full z-50 bg-transparent backdrop-blur-[40px]">
+    <div className="fixed w-full z-40 bg-transparent backdrop-blur-[40px]">
       <div className="overla absolute w-full h-full blur-[40px]"></div>
       {user ? (
         <>

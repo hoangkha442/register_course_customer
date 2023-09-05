@@ -11,10 +11,12 @@ import CheckOut from "./pages/CheckOut/CheckOut";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import Search from "./pages/Search/Search";
 import CoursesOnCategory from "./pages/HomePage/Categories/CoursesOnCategory";
+import Spinner from "./components/Spinner/Spinner";
 
 function App() {
   return (
     <div>
+      <Spinner />
       <Router>
         <Routes>
           <Route path="/" element={<UserTemplate />}>

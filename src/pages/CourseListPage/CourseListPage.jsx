@@ -20,10 +20,10 @@ export default function CourseListPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [fallbackImage, setFallbackImage] = useState("");
   const [listCourses, setListCourses] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [sizeItem, setSizeItem] = useState(8);
-  const [fallbackImage, setFallbackImage] = useState("");
   const onChange = (pageNumber, pageSize) => {
     setCurrentPage(pageNumber);
     setSizeItem(pageSize);
