@@ -107,15 +107,15 @@ export default function Search() {
         </div>
         <div className="min-h-screen w-full lg:w-[80%] ml-auto bg-[#f9fafb]">
           <div className="py-[105px]">
-            {listSearchCoursesValues.length !== 0 ? (
+            {listSearchCoursesValues?.length !== 0 ? (
               <div className="container-90">
                 <div className="flex flex-col text-start w-full mb-5">
                   <h1 className="sm:text-3xl tracking-wider text-2xl font-bold title-font text-gray-900">
-                    {listSearchCoursesValues.length} results for "
+                    {listSearchCoursesValues?.length} results for "
                     {searchParams.get("q")}"
                   </h1>
                 </div>
-                {listSearchCoursesValues.map((item) => {
+                {listSearchCoursesValues?.map((item) => {
                   return (
                     <div className="cursor-pointer">
                       <div
@@ -184,7 +184,7 @@ export default function Search() {
                             >
                               <div className="flex items-center justify-between">
                                 <p className="font-semibold md:leading-relaxed md:text-[18px] text-[#2d2d2d]">
-                                  {item.tenKhoaHoc}
+                                  {item?.tenKhoaHoc}
                                 </p>
                                 <div class="text-lg lg:block hidden font-semibold text-[#2d2d2d]">
                                   <p>₫15,999,000</p>
@@ -192,9 +192,9 @@ export default function Search() {
                               </div>
                               <div className="flex justify-between my-1">
                                 <p className="md:block text-sm hidden text-[#2d2d2d] font-[300] pr-36">
-                                  {item.moTa.length > 80
-                                    ? item.moTa.slice(0, 100) + "..."
-                                    : item.moTa +
+                                  {item?.moTa?.length > 80
+                                    ? item?.moTa.slice(0, 100) + "..."
+                                    : item?.moTa +
                                       "Grafana from Basic to ADVANCE level; Complete Guide to Master DevOps Monitoring & Alerting"}
                                 </p>
                                 <div class="text-xs lg:block hidden  line-through font-semibold text-[#2d2d2d]">
@@ -213,7 +213,7 @@ export default function Search() {
                                   </div>
                                 </p>
                                 <div className="flex items-center text-base text-[#2d2d2d]">
-                                  <UsergroupAddOutlined /> {item.luotXem}{" "}
+                                  <UsergroupAddOutlined /> {item?.luotXem}
                                   Enerolled
                                 </div>
                               </div>

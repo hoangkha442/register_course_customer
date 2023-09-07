@@ -2,7 +2,7 @@ import { https } from "./Config";
 // CoursesService
 export const CoursesService = {
   getCoursesList: () => {
-    return https.get(`/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP05`);
+    return https.get(`/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP15`);
   }
   ,getCoursesListPopular: () => {
     return https.get(`/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP01`);
@@ -12,7 +12,7 @@ export const CoursesService = {
   },
   getCourseListPagination: (currentPage, sizePage) => {
     return https.get(
-      `/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc_PhanTrang?page=${currentPage}&pageSize=${sizePage}&MaNhom=GP01`
+      `/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc_PhanTrang?page=${currentPage}&pageSize=${sizePage}&MaNhom=GP15`
     );
   },
   getCategory: () => { 

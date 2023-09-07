@@ -1,8 +1,12 @@
-USER: KHA
-link Code: https://github.com/
-link deploy: https://vercel
+{
+    Hoàng Kha:  
+    + User: https://github.com/hoangkha442/Register_Courses (source)
+            https://register-courses.vercel.app/ (deploy)
+    + Admin: https://github.com/hoangkha442/Register_Courses_Admin (source)
+            https://register-courses-admin.vercel.app/ (deploy)
+}
 
-
-ADMIN: LAM
-link Code: https://github.com/
-link deploy: https://vercel
+{
+    Kha Lâm:
+    + Admin: 
+}
