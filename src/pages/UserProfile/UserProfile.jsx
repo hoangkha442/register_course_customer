@@ -40,7 +40,6 @@ export default function UserProfile() {
         });
       })
       .catch((err) => {
-        console.log("err: ", err);
         Swal.fire({
           position: "center",
           icon: "error",

@@ -49,7 +49,6 @@ export default function CoursesOnCategory() {
   };
   const handleDispatchCourseWishList = (item) => {
     if (user) {
-      console.log("item: ", item);
       dispatch(setCoursesListWishList(item));
     } else {
       navigate("/login");

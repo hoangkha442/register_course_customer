@@ -22,7 +22,6 @@ export default function RegisterPage() {
     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+{};:,<.>/?]).{1,20}$/;
 
   const onFinish = (values) => {
-    console.log("values: ", values);
     UserService.postRegister(values)
       .then((res) => {
         Swal.fire({

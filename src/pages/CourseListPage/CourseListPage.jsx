@@ -32,10 +32,9 @@ export default function CourseListPage() {
   useEffect(() => {
     CoursesService.getCourseListPagination(currentPage, sizeItem)
       .then((res) => {
-        console.log("res: ", res.data);
         setListCourses(res.data);
       })
-      .catch((err) => {
+      .catch((err) => { 
         console.log("err: ", err);
       });
   }, [currentPage, sizeItem]);
@@ -79,7 +78,6 @@ export default function CourseListPage() {
   };
   const handleDispatchCourseWishList = (item) => {
     if (user) {
-      console.log("item: ", item);
       dispatch(setCoursesListWishList(item));
     } else {
       navigate("/login");

@@ -16,7 +16,6 @@ export default function DetailPage() {
     useEffect(() => { 
         CoursesService.getDetailCourses(id)
         .then((res) => { 
-            console.log('res: ', res);
             setDetailCourse(res.data)
         })
         .catch((err) => { 

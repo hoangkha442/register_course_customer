@@ -56,7 +56,6 @@ export default function Search() {
   };
   const handleDispatchCourseWishList = (item) => {
     if (user) {
-      console.log("item: ", item);
       dispatch(setCoursesListWishList(item));
     } else {
       navigate("/login");

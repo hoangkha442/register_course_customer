@@ -10,7 +10,6 @@ export default function Categories() {
   useEffect(() => {
     CoursesService.getCategory()
       .then((res) => {
-        console.log("res: ", res);
         setCategory(res.data);
       })
       .catch((err) => {

@@ -20,7 +20,6 @@ export default function PopularCoureses() {
       })
       .catch((err) => {
         console.log("err: ", err);
-        console.log();
       });
   }, []);
   const user = useSelector((state) => {
@@ -112,7 +111,6 @@ export default function PopularCoureses() {
   };
   const handleDispatchCourseWishList = (item) => {
     if (user) {
-      console.log("item: ", item);
       dispatch(setCoursesListWishList(item));
     } else {
       navigate("/login");

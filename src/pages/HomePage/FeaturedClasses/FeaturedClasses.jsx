@@ -11,7 +11,7 @@ export default function FeaturedClasses() {
       setFeatureCourses(res.data)
     })
     .catch((err) => { 
-      console.log('err: ', err);console.log();
+      console.log('err: ', err)
     })
   },[])
   const renderFeatureCourses = () => { 

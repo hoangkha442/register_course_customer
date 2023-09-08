@@ -19,7 +19,7 @@ export default function CheckOut() {
     return state.coursesSlice.coursesListRegister;
   });
   const dispatch = useDispatch();
-  // console.log('listCoursesRegister: ', listCoursesRegister);
+  // Render Course List
   const handleRenderCoursesCheckOut = () => {
     return listCoursesRegister.map((item, index) => {
       return (
@@ -65,7 +65,7 @@ export default function CheckOut() {
       );
     });
   };
-  // hủy ghi khóa học trong danh sách
+  // Unsubscribe
   const handleDeleteCoursesListRegister = (item) => {
     CoursesService.postCancelCourses({
       maKhoaHoc: item.maKhoaHoc,
