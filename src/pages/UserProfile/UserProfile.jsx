@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { UserService } from "../../services/UserService";
 import { userLocalStorage } from "../../services/LocalService";
+const { Option } = Select;
 
 export default function UserProfile() {
   const navigate = useNavigate();
@@ -20,7 +21,6 @@ export default function UserProfile() {
   const onFinish = (values) => {
     const userProfile = {
       ...values,
-      maLoaiNguoiDung: "GV",
       maNhom: "GP01",
       taiKhoan: user.taiKhoan,
     };
@@ -34,10 +34,10 @@ export default function UserProfile() {
           showConfirmButton: false,
           timer: 1500,
         });
+        userLocalStorage.remove();
         setTimeout(() => {
-          window.location.reload();
-          userLocalStorage.remove();
-        });
+          navigate('/login')
+        }, 1500);
       })
       .catch((err) => {
         Swal.fire({
@@ -158,6 +158,26 @@ export default function UserProfile() {
                       className="w-full px-4 py-2  bg-white border rounded-md  focus:outline-none focus:ring focus:ring-opacity-40"
                     />
                   </Form.Item>
+                  {/* Position  */}
+                  <Form.Item
+                      label="Position"
+                      className="mb-2"
+                      name="maLoaiNguoiDung" 
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input Position!",
+                        },
+                      ]}
+                    >
+                      <Select
+                        placeholder="Select a option and change input text above"
+                        allowClear
+                      >
+                        <Option value="GV">GV</Option>
+                        <Option value="HV">HV</Option>
+                      </Select>
+                    </Form.Item>
                   {/* Phone  */}
                   <Form.Item
                     label="Phone"

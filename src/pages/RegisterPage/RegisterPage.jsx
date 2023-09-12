@@ -27,7 +27,7 @@ export default function RegisterPage() {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Register Successfully",
+          title: "Register success",
           showConfirmButton: false,
           timer: 1500,
         });

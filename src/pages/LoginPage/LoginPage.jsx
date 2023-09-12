@@ -17,7 +17,7 @@ export default function LoginPage() {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Login Successfully!",
+          title: "Login success!",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -38,7 +38,6 @@ export default function LoginPage() {
           showConfirmButton: false,
           timer: 1500,
         });
-        message.error("Login failed!");
       });
   };
   let navigate = useNavigate();

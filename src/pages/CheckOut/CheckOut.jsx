@@ -76,7 +76,7 @@ export default function CheckOut() {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Unsubscribe successfully!",
+          title: "Unsubscribe success!",
           showConfirmButton: false,
           timer: 1000,
         });
