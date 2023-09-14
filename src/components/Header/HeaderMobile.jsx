@@ -13,7 +13,7 @@ import {
   PlayCircleOutlined,
   PayCircleOutlined,
   WechatOutlined,
-  ExclamationCircleOutlined,
+  FundOutlined,
   UnorderedListOutlined,
   CreditCardOutlined,
   DownOutlined,
@@ -171,6 +171,24 @@ export default function HeaderMobile() {
       icon: (
         <div className="rounded-md w-8 h-8 bg-gradient-to-tl from-[#f9a8d4] to-[#ef4444] text-2xl justify-center">
           <HeartOutlined
+            style={{ fontSize: "16px", textAlign: "center" }}
+            className="text-white"
+          />
+        </div>
+      ),
+    },
+    {
+      label: (
+        <NavLink to="/user-courses">
+          <span className="text-[15px] font-[500] tracking-wider text-[#585757]">
+          Awaiting approval
+          </span>
+        </NavLink>
+      ),
+      key: "AwaitingApproval",
+      icon: (
+        <div className="rounded-md w-8 h-8 bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] text-2xl justify-center">
+          <FundOutlined 
             style={{ fontSize: "16px", textAlign: "center" }}
             className="text-white"
           />

@@ -28,7 +28,8 @@ export const CoursesService = {
   },
   postCancelCourses: (data) => {
     return https.post("/api/QuanLyKhoaHoc/HuyGhiDanh", data);
-  },
+  }
+  ,
   postCourses: (data) => {
     return https.post("/api/QuanLyKhoaHoc/ThemKhoaHoc", data);
   },
