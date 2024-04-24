@@ -1,222 +1,107 @@
-import React, { useEffect, useState } from "react";
-import NavBar from "../HomePage/NavBar/NavBar";
-import { Button, Checkbox, Form, Input, Select, message } from "antd";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { Form, Input } from "antd";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+
+import NavBar from "../HomePage/NavBar/NavBar";
 import { UserService } from "../../services/UserService";
-import { userLocalStorage } from "../../services/LocalService";
-const { Option } = Select;
+
+const regexPatterns = {
+  number: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$/,
+  name: /^(?=.*[a-zA-Z]).{1,20}$/,
+  email: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+  password: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+{};:,<.>/?]).{1,20}$/,
+};
 
 export default function UserProfile() {
-  const navigate = useNavigate();
-  const user = useSelector((state) => {
-    return state.userSlice.userInfo;
-  });
-  const regexNumber = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$/;
-  const regexName = /^(?=.*[a-zA-Z]).{1,20}$/;
-  const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  const regexPassword =
-    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+{};:,<.>/?]).{1,20}$/;
+  const [form] = Form.useForm();
+  useEffect(() => {
+    UserService.getMyInfor()
+      .then(response => form.setFieldsValue(response.data))
+      .catch(error => console.error(error));
+  }, []);
+
   const onFinish = (values) => {
-    const userProfile = {
-      ...values,
-      maNhom: "GP01",
-      taiKhoan: user.taiKhoan,
-    };
+    const userProfile = { ...values, role: "hocVien" };
     UserService.putUserInfor(userProfile)
-      .then((res) => {
-        navigate("/login");
+      .then(response => {
+        form.setFieldsValue(response.data);
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Update Success",
+          title: "Profile updated successfully",
           showConfirmButton: false,
           timer: 1500,
         });
-        userLocalStorage.remove();
-        setTimeout(() => {
-          navigate('/login')
-        }, 1500);
+        setTimeout(() => window.location.reload(), 600);
       })
-      .catch((err) => {
+      .catch(error => {
         Swal.fire({
           position: "center",
           icon: "error",
-          title: `${err.response.data} please try again !`,
+          title: `${error.data} Please try again`,
           showConfirmButton: false,
           timer: 1500,
         });
       });
   };
+
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    console.error("Failed:", errorInfo);
   };
+
   return (
-    <div className="h-max-content min-h-screen w-full bg-cover bg-white flex overflow-hidden relative">
-      <div className="absolute w-full h-full bg-[#e5e7eb]"></div>
-      <div className="pt-[70px] lg:block hidden fixed h-screen top-0 w-[20%] bg-white flex-shrink-0  border-r border-r-[#e5e7eb]">
-        <NavBar />
-      </div>
-      <div className="min-h-screen lg:w-[80%] w-full ml-auto">
-        <div className="py-[90px]">
-          <div className="container-80">
-            <div className="relative flex flex-col justify-cente overflow-hidden">
+
+          <div className="container-80 py-[105px]">
+            <div className="relative flex flex-col justify-center overflow-hidden">
               <div className="w-full lg:mt-0 mt-10 p-6 m-auto bg-white rounded-md shadow-xl md:max-w-lg">
-                <h1 className="text-3xl mt-4 font-semibold text-center text-black">
-                  Profile & Settings
-                </h1>
+                <h1 className="text-3xl mt-4 font-semibold text-center text-black">Update Profile</h1>
                 <Form
                   className="mt-6"
                   name="basic"
-                  labelCol={{
-                    span: 24,
-                  }}
-                  wrapperCol={{
-                    span: 24,
-                  }}
-                  style={{
-                    maxWidth: 600,
-                  }}
-                  initialValues={{
-                    remember: true,
-                  }}
+                  labelCol={{ span: 24 }}
+                  wrapperCol={{ span: 24 }}
+                  initialValues={{ remember: true }}
                   onFinish={onFinish}
                   onFinishFailed={onFinishFailed}
+                  form={form}
                   autoComplete="off"
                 >
-                  {/* UserName */}
-                  <Form.Item label="USERNAME" className="mb-2" name="taiKhoan">
-                    <Input
-                      disabled
-                      placeholder={user.taiKhoan}
-                      className="w-full px-4 py-2 text-gray-900 bg-white border rounded-md "
-                    />
-                  </Form.Item>
                   <Form.Item
-                    label="FullName"
-                    className="mb-2"
-                    name="hoTen"
+                    label="Full Name"
+                    name="full_name"
                     rules={[
-                      {
-                        required: true,
-                        message: "Please input your FullName!",
-                      },
-                      {
-                        pattern: regexName,
-                        message:
-                          "Must have at least one letter & limit of 20 words!",
-                      },
+                      { required: true, message: "Please input your full name!" },
+                      { pattern: regexPatterns.name, message: "Must have at least one letter & limit of 20 characters!" }
                     ]}
                   >
-                    <Input
-                      placeholder={user.hoTen}
-                      className="w-full px-4 py-2 text-gray-900 bg-white border rounded-md "
-                    />
+                    <Input className="w-full px-4 py-2 text-gray-900 bg-white border rounded-md" />
                   </Form.Item>
-
-                  {/* Password  */}
-                  <Form.Item
-                    label="Password"
-                    className="mb-2"
-                    name="matKhau"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input your password!",
-                      },
-                      {
-                        pattern: regexPassword,
-                        message:
-                          "Must contain at least one digit, both uppercase and lowercase letters, a special character, and must not exceed 20 characters",
-                      },
-                    ]}
-                  >
-                    <Input.Password
-                      placeholder="**********"
-                      className="w-full px-4 py-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                    />
-                  </Form.Item>
-                  {/* Email  */}
                   <Form.Item
                     label="Email"
-                    className="mb-2"
                     name="email"
                     rules={[
-                      {
-                        required: true,
-                        message: "Please input your email!",
-                      },
-                      {
-                        pattern: regexEmail,
-                        message: "Email invalidate",
-                      },
+                      { required: true, message: "Please input your email!" },
+                      { pattern: regexPatterns.email, message: "Email is invalid" }
                     ]}
                   >
-                    <Input
-                      placeholder={user.email}
-                      className="w-full px-4 py-2  bg-white border rounded-md  focus:outline-none focus:ring focus:ring-opacity-40"
-                    />
+                    <Input className="w-full px-4 py-2 bg-white border rounded-md focus:outline-none focus:ring focus:ring-opacity-40" />
                   </Form.Item>
-                  {/* Position  */}
-                  <Form.Item
-                      label="Position"
-                      className="mb-2"
-                      name="maLoaiNguoiDung" 
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please input Position!",
-                        },
-                      ]}
-                    >
-                      <Select
-                        placeholder="Select a option and change input text above"
-                        allowClear
-                      >
-                        <Option value="GV">GV</Option>
-                        <Option value="HV">HV</Option>
-                      </Select>
-                    </Form.Item>
-                  {/* Phone  */}
                   <Form.Item
                     label="Phone"
-                    className="mb-2"
-                    name="soDt"
+                    name="phone_number"
                     rules={[
-                      {
-                        required: true,
-                        message: "Please input your phone!",
-                      },
-                      {
-                        pattern: regexNumber,
-                        message: "Must be a number",
-                      },
+                      { required: true, message: "Please input your phone number!" },
+                      { pattern: regexPatterns.number, message: "Must be a valid phone number" }
                     ]}
                   >
-                    <Input
-                      placeholder={user.soDT}
-                      className="w-full px-4 py-2  bg-white border rounded-md focus:outline-none focus:ring focus:ring-opacity-40"
-                    />
+                    <Input className="w-full px-4 py-2 bg-white border rounded-md focus:outline-none focus:ring focus:ring-opacity-40" />
                   </Form.Item>
-                  {/* Phone  */}
-                  <Form.Item
-                    label="maLoaiNguoiDung"
-                    className="mb-2 hidden"
-                    name="maLoaiNguoiDung"
-                  >
-                    <input
-                      value="hocVien"
-                      disabled
-                      className="w-full px-4 py-2 bg-white border rounded-md  focus:outline-none focus:ring focus:ring-opacity-40"
-                    />
+                  <Form.Item label="Address" name="address">
+                    <Input className="w-full px-4 py-2 bg-white border rounded-md focus:outline-none focus:ring focus:ring-opacity-40" />
                   </Form.Item>
-                  {/* BUTTON */}
                   <Form.Item className="mt-6">
-                    <button
-                      type="submit"
-                      className=" text-base w-full px-4 py-2 tracking-wide text-white font-bold transition-colors duration-200 transform bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] hover:from-[#ef4444] hover:to-[#fcd34d] rounded-md  focus:outline-none"
-                    >
+                    <button type="submit" className="text-base w-full px-4 py-2 tracking-wide text-white font-bold transition-colors duration-200 transform bg-gradient-to-tl from-yellow-400 to-red-500 hover:from-red-500 hover:to-yellow-400 rounded-md focus:outline-none">
                       Update
                     </button>
                   </Form.Item>
@@ -224,8 +109,5 @@ export default function UserProfile() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
   );
 }

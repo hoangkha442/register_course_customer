@@ -17,9 +17,14 @@
     color: #2a41e8 !important;
 }
 
+
 .ant-menu-item-selected .ant-menu-title-content span{
     color: rgb(88, 87, 87);
 }   
+
+.ant-menu-light.ant-menu-root.ant-menu-inline, .ant-menu-light>.ant-menu.ant-menu-root.ant-menu-inline, .ant-menu-light.ant-menu-root.ant-menu-vertical, .ant-menu-light>.ant-menu.ant-menu-root.ant-menu-vertica{
+    border: none !important;
+}
 
 .ant-menu-item{
     margin: 8px 0 !important;

@@ -4,6 +4,7 @@ import {
   coursesListRegisterStorage,
   wishListStorage,
 } from "../services/LocalService";
+import Swal from "sweetalert2";
 
 const initialState = {
   coursesListWishList: wishListStorage.get(),
@@ -16,19 +17,15 @@ const coursesSlice = createSlice({
   reducers: {
     setCoursesListWishList: (state, action) => {
       let newCoursesListWishList = [...state.coursesListWishList];
-      const index = newCoursesListWishList.findIndex((course, index) => {
-        return course.maKhoaHoc === action.payload.maKhoaHoc;
-      });
-      if (index == -1) {
-        let newCourseWishList = { ...action.payload };
-        newCoursesListWishList.push(newCourseWishList);
-        message.success("Add From Favorites list");
-        state.coursesListWishList = newCoursesListWishList;
+      const index = newCoursesListWishList.findIndex(course => course.class_id === action.payload.class_id);
+      if (index === -1) {
+        newCoursesListWishList.push(action.payload);
+        message.success("Đã thêm môn học vào danh sách yêu thích!");
       } else {
         newCoursesListWishList.splice(index, 1);
-        message.success("Remove From Favorites list");
-        state.coursesListWishList = newCoursesListWishList;
+        message.success("Đã xóa môn học khỏi danh sách yêu thích!");
       }
+      state.coursesListWishList = newCoursesListWishList;
       wishListStorage.set(newCoursesListWishList);
     },
     // đăng kí ghi danh , danh sách khóa học
@@ -57,30 +54,52 @@ const coursesSlice = createSlice({
       let index = newCoursesListRegister.findIndex((course) => {
         return course.maKhoaHoc === action.payload.maKhoaHoc;
       });
-
       if (index !== -1) {
         newCoursesListRegister.splice(index, 1);
         state.coursesListRegister = newCoursesListRegister;
       }
       coursesListRegisterStorage.set(newCoursesListRegister);
     },
+
+
     setCourseAddToCart: (state, action) => {
       let newCourseAddToCart = [...state.coursesListRegister];
-      let index = newCourseAddToCart.findIndex((course) => {
-        return course.maKhoaHoc === action.payload.maKhoaHoc;
-      });
+      let index = newCourseAddToCart.findIndex(course => course.class_id === action.payload.class_id);
       if (index === -1) {
         let courseAddToCart = {
-          ...action.payload,
-          giaHienTai: 16999000,
-          giaKhuyenMai: 15999000,
+          ...action.payload
         };
         newCourseAddToCart.push(courseAddToCart);
         state.coursesListRegister = newCourseAddToCart;
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Đã thêm môn học vào giỏ hàng!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Môn học đã có trong giỏ hàng!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         return;
       }
       coursesListRegisterStorage.set(newCourseAddToCart);
+    },
+    // hủy setCourseAddToCart
+    setDeleteAddToCart: (state, action) => {
+      let newCoursesListAddToCart = [...state.coursesListRegister];
+      let index = newCoursesListAddToCart.findIndex(course => course.class_id === action.payload.class_id);
+      if (index !== -1) {
+        newCoursesListAddToCart.splice(index, 1);
+        state.coursesListRegister = newCoursesListAddToCart;
+        message.success("Đã xóa môn học khỏi giỏ hàng!");
+      }
+      coursesListRegisterStorage.set(newCoursesListAddToCart);
     },
   },
 });
@@ -90,6 +109,7 @@ export const {
   setRegisterCoursesList,
   setDeleteCoursesListRegister,
   setCourseAddToCart,
+  setDeleteAddToCart,
 } = coursesSlice.actions;
 
 export default coursesSlice.reducer;

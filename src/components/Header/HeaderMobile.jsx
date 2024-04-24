@@ -30,7 +30,6 @@ export default function HeaderMobile() {
   };
   const [current, setCurrent] = useState("mail");
   const onClick = (e) => {
-    console.log("click ", e);
     setCurrent(e.key);
   };
   const handleOk = () => {
@@ -65,7 +64,6 @@ export default function HeaderMobile() {
   };
   const handleOnchange = (event) => {
     let { value } = event.target;
-    console.log("event.target: ", event.target.value);
     setSearchItem(value);
   };
   const items = [

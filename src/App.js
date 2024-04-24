@@ -32,7 +32,7 @@ function App() {
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/user-courses" element={<UserCourses />} />
             <Route
-              path="/caterogy/:maDanhMuc"
+              path="/caterogy/:tenMonHoc"
               element={<CoursesOnCategory />}
             />
           </Route>

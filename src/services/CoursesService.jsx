@@ -3,24 +3,27 @@ import { https } from "./Config";
 export const CoursesService = {
   getCoursesList: () => {
     return https.get(`/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP15`);
-  }
-  ,getCoursesListPopular: () => {
-    return https.get(`/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP15`);
+  },
+  getClassWithMostRegistrations: () => { 
+    return https.get('/class/most-registrations')
+  },
+  getCoursesListPopular: () => {
+    return https.get(`/class/popular-classes`);
   },
   getDetailCourses: (value) => {
     return https.get(`/api/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=${value}`);
   },
   getCourseListPagination: (currentPage, sizePage) => {
     return https.get(
-      `/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc_PhanTrang?page=${currentPage}&pageSize=${sizePage}&MaNhom=GP15`
+      `/class/pagination?page=${currentPage}&pageSize=${sizePage}`
     );
   },
-  getCategory: () => { 
-    return https.get('/api/QuanLyKhoaHoc/LayDanhMucKhoaHoc')
-   }
+  getCategorySubject: () => { 
+    return https.get('/subject')
+  }
   ,  
-  getCourseOnCategory: (data) => { 
-    return https.get(`/api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${data}&MaNhom=GP01`)
+  getCourseOnCategory: () => { 
+    return https.get(`/class`)
    }
   ,
   postRegisterCourses: (data) => {

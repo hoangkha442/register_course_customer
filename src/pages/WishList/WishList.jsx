@@ -28,11 +28,6 @@ export default function WishList() {
   }, []);
   const handleAddToCart = (items, cart) => {
     if (user) {
-      CoursesService.postRegisterCourses({
-        maKhoaHoc: items,
-        taiKhoan: user.taiKhoan,
-      })
-        .then((res) => {
           dispatch(setCourseAddToCart(cart));
           Swal.fire({
             position: "center",
@@ -41,16 +36,6 @@ export default function WishList() {
             showConfirmButton: false,
             timer: 1000,
           });
-        })
-        .catch((err) => {
-          Swal.fire({
-            position: "center",
-            icon: "error",
-            title: "The course is already in your cart",
-            showConfirmButton: false,
-            timer: 1000,
-          });
-        });
     } else {
       navigate("/login");
     }
@@ -65,18 +50,18 @@ export default function WishList() {
   const renderWishList = () => {
     return coursesWishLish.map((item, index) => {
       return (
-        <div key={item.maKhoaHoc} className="shadow-sm bg-white rounded-md">
+        <div key={item.class_id} className="shadow-sm bg-white rounded-md">
           <figure class="rounded-md movie-item hover:before:left-[125%] relative overflow-hidden cursor-pointe">
             <img
               className="w-[320px] cursor-pointer h-[175px] object-cover rounded-md"
               src={item.hinhAnh}
               alt={item.biDanh}
             />
-            <NavLink to={`/detail/${item?.maKhoaHoc}`}>
+            <NavLink to={`/detail/${item?.class_id}`}>
               <figcaption className="overlay absolute left-0 bottom-0 w-full h-[100%] opacity-0 bg-overlay hover:opacity-100 transition-all duration-1000">
                 <div className="figcaption-btn w-[80%] h-[30%]">
                   <Button className="text-white border-none rounded-3xl bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] font-[500] hover:text-white uppercase flex items-center">
-                    <span>view Detail</span>
+                    <span>Xem chi tiết</span>
                     <i class="fa fa-angle-right ml-1 text-[10px] mt-[2px] font-bold"></i>
                   </Button>
                 </div>
@@ -85,15 +70,13 @@ export default function WishList() {
           </figure>
           <div className="rounded-md p-4">
             <p class="font-semibold line-clamp-2 text-[#666666]">
-              {item.danhMucKhoaHoc.tenDanhMucKhoaHoc}
+              {item.class_name}
             </p>
             <div className="flex space-x-2 items-center text-sm pt-1 text-[#666666]">
-              <p>23 hours</p>
-              <p>·</p>
-              <p>40 lectures</p>
+              {item.schedule}
             </div>
             <div className="flex justify-between items-center  text-sm pt-1 text-[#727374]">
-              <p className="font-[500]">Like</p>
+              <p className="font-[500]">Thích</p>
               <div className="text-red-600 transition-all duration-300 cursor-pointer">
                 <i
                   class="fa fa-heart text-xl"
@@ -111,7 +94,7 @@ export default function WishList() {
                 className="text-white w-full text-center py-1 border-none rounded bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] hover:bg-gradient-to-tl hover:from-[#ef4444] hover:to-[#fcd34d] transition-all duration-500 font-[500] uppercase flex items-center justify-center"
               >
                 <span className="hover:text-white text-[15px]">
-                  Add to cart
+                  Thêm vào giỏ hàng
                 </span>
                 <i class="fa fa-angle-right ml-1 text-[10px] mt-[2px] font-bold"></i>
               </button>
@@ -122,23 +105,19 @@ export default function WishList() {
     });
   };
   return (
-    <div className="">
-      <div className="h-max-content min-h-screen w-full bg-cover bg-white flex overflow-hidden">
-        <div className="pt-[70px] lg:block hidden fixed h-screen top-0 w-[20%] bg-white flex-shrink-0  border-r border-r-[#e5e7eb]">
-          <NavBar />
-        </div>
-        <div className="min-h-screen w-full lg:w-[80%] ml-auto bg-[#f9fafb]">
+
+        <div className="bg-[#f9fafb]">
           <div className="py-[105px]">
             <div className="">
               {user ? (
                 <>
                   {coursesWishLish.length === 0 ? (
                     <div className="container-90">
-                      <p className="mb-8 text-4xl tracking-wider font-bold">
-                        Favorites List
+                      <p className="mb-2 text-4xl tracking-wider font-bold">
+                        Danh sách khóa học yêu thích
                       </p>
                       <p className="font-[500] mb-2">
-                        {coursesWishLish.length} Courses in favorites list
+                        <span className="font-bold">{coursesWishLish.length}</span> môn học trong danh sách yêu thích
                       </p>
                       <div className="shadow-md text-center bg-white">
                         <div className="w-60 h-44 mx-auto text-center mb-9">
@@ -149,8 +128,9 @@ export default function WishList() {
                           />
                         </div>
                         <p className="mb-9">
-                          Your favorites list is empty. Keep shopping to find a
-                          course!
+                          {/* Your favorites list is empty. Keep shopping to find a
+                          course! */}
+                          Danh sách hiện tại đang trống. <br /> Tiếp tục tìm môn học yêu thích của bạn!
                         </p>
                         <button
                           onClick={() => {
@@ -160,17 +140,17 @@ export default function WishList() {
                           }}
                           className="mb-20 font-[500] px-3 py-1 rounded-md bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] hover:bg-gradient-to-tl hover:from-[#ef4444] hover:to-[#fcd34d] text-base text-white"
                         >
-                          Keep Shopping
+                          Xem thêm các môn học
                         </button>
                       </div>
                     </div>
                   ) : (
                     <div className=" container-90">
                       <p className="mb-1 text-4xl tracking-wider font-bold">
-                        Favorites List
+                        Danh sách môn học yêu thích
                       </p>
                       <p className="font-[500] mb-2">
-                        {coursesWishLish.length} Courses in favorites list
+                        <span className="font-bold">{coursesWishLish.length}</span> môn học trong danh sách yêu thích
                       </p>
                       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 gap-3 mt-5">
                         {renderWishList()}
@@ -184,7 +164,5 @@ export default function WishList() {
             </div>
           </div>
         </div>
-      </div>
-    </div>
   );
 }

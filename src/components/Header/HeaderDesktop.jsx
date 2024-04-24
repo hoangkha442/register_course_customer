@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SearchForm.css";
 import { Button, Modal, message } from "antd";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -11,13 +11,33 @@ import {
   HeartOutlined,
 } from "@ant-design/icons";
 import Swal from "sweetalert2";
+import { UserService } from "../../services/UserService";
+import { useInternalNotification } from "antd/es/notification/useNotification";
 
 export default function HeaderDesktop() {
   const navigate = useNavigate();
   const [searchItem, setSearchItem] = useState("");
+  const [userInfo, setUserInfo] = useState("");
   const user = useSelector((state) => {
     return state.userSlice.userInfo;
   });
+  const listRegisterCourses = useSelector((state) => {
+    console.log('state.coursesSlice: ', state.coursesSlice);
+    return state.coursesSlice.coursesListRegister;
+  });
+  useEffect(() => {
+    if (userInfo) { // Ensure userInfo is loaded
+      const results = listRegisterCourses.filter(course => {
+        return course.users && course.users.full_name.includes(userInfo);
+      });
+    }
+  }, [userInfo, listRegisterCourses])
+  useEffect(() => { 
+    UserService.getMyInfor().then((res) => {
+      setUserInfo(res.data.full_name);
+    }).catch((err) => { 
+    });  
+  }, []);
   const handleLogout = () => {
     navigate("/login");
     Swal.fire({
@@ -32,8 +52,9 @@ export default function HeaderDesktop() {
       window.location.reload();
     });
   };
-  const listRegisterCourses = useSelector((state) => {
-    return state.coursesSlice.coursesListRegister;
+  
+  const filteredCourses = listRegisterCourses.filter(course => {
+    return course.users && course.users.full_name && userInfo.includes(course.full_name);
   });
   const handleSearch = (event) => {
     event.preventDefault();
@@ -41,7 +62,6 @@ export default function HeaderDesktop() {
   };
   const handleOnchange = (event) => {
     let { value } = event.target;
-    console.log("event.target: ", event.target.value);
     setSearchItem(value);
   };
   const [showModalTailwind, setShowModalTailwind] = React.useState(false);
@@ -72,14 +92,14 @@ export default function HeaderDesktop() {
                   required
                   className="font-[300] border-[2px] border-[#e8e8e8] rounded-3xl pr-24 pl-9 h-10 overflow-hidden  focus:outline-none"
                   type="text"
-                  placeholder=" Quick search for anything.."
+                  placeholder="Tìm kiếm khóa học ..."
                 />
                 <button className="search-form"></button>
               </form>
             </div>
             <div className="flex items-center justify-end flex-1 h-[72px]">
               <div className="flex items-center space-x-5">
-                {listRegisterCourses.length === 0 ? (
+                {filteredCourses.length === 0 ? (
                   <button
                     onClick={() => {
                       navigate("/check-out");
@@ -95,7 +115,7 @@ export default function HeaderDesktop() {
                     className="relative z-10"
                   >
                     <div className="absolute -top-1 -right-3 w-5 h-5 leading-5 bg-gradient-to-r from-[#fcaa4d] to-[#ef4444] rounded-full text-white text-xs font-bold z-20 text-center align-middle">
-                      {listRegisterCourses.length}
+                      {filteredCourses.length}
                     </div>
                     <ShoppingCartOutlined className="text-2xl" />
                   </button>
@@ -137,7 +157,7 @@ export default function HeaderDesktop() {
                                 />
                                 <div className="flex flex-col">
                                   <p className="font-[600] text-[#333] leading-5 text-base">
-                                    {user.hoTen}
+                                    {user.full_name}
                                   </p>
                                   <p className="text-[#959595] text-[12.5px]">
                                     {user.email}

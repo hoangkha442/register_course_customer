@@ -1,10 +1,10 @@
 import { https } from "./Config";
 export const UserService = {
   postLogin: (data) => {
-    return https.post("/api/QuanLyNguoiDung/DangNhap", data);
+    return https.post("/auth/login", data);
   },
   postRegister: (data) => {
-    return https.post("/api/QuanLyNguoiDung/DangKy", data);
+    return https.post("/auth/signup", data);
   },
   postUserInfor: () => {
     return https.post("/api/QuanLyNguoiDung/ThongTinTaiKhoan");
@@ -13,8 +13,11 @@ export const UserService = {
     return https.post("/api/QuanLyKhoaHoc/HuyGhiDanh", data);
    }
   ,
+  getMyInfor : () => { 
+    return https.get('/user/my-info')
+  },
   putUserInfor: (data) => {
-    return https.put("/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung", data);
+    return https.put(`/user/update-profile`, data);
   },
   getUserListPagination: (currentPage, sizePage) => {
     return https.get(

@@ -8,7 +8,6 @@ import Swal from "sweetalert2";
 
 export default function UserCourses() {
   const [userCourse, setUserCourse] = useState([]);
-  console.log("userCourse: ", userCourse);
   const user = useSelector((state) => {
     return state.userSlice.userInfo;
   });
@@ -97,17 +96,12 @@ export default function UserCourses() {
     });
   };
   return (
-    <div className="h-max-content min-h-screen w-full bg-cover flex overflow-hidden bg-[#f9fafb]">
-      <div className="pt-[70px] lg:block hidden fixed h-screen top-0 w-[20%] bg-white flex-shrink-0  border-r border-r-[#e5e7eb]">
-        <NavBar />
-      </div>
-      <div className="min-h-screen lg:w-[80%] w-full ml-auto">
         <div className="py-[105px]">
           <div className="container-90">
-            <p className="mb-8 text-4xl tracking-wider font-bold">
-              Courses are currently enrolled
+            <p className="mb-2 text-4xl font-bold">
+              Các môn học đang được đăng ký
             </p>
-            <p className="font-[500] mb-2">{userCourse?.length} Courses</p>
+            <p className="font-[500] mb-2"><span className="font-bold">{userCourse?.length}</span> môn học</p>
             <section class="text-gray-600 body-font">
               <div class="px-5 py-5 mx-auto ">
                 <div class="">{myCoursesRegister()}</div>
@@ -115,7 +109,5 @@ export default function UserCourses() {
             </section>
           </div>
         </div>
-      </div>
-    </div>
   );
 }
