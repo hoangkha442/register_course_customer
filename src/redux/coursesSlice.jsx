@@ -43,23 +43,37 @@ const coursesSlice = createSlice({
         newCoursesListRegister.push(newCourseRegister);
         state.coursesListRegister = newCoursesListRegister;
       } else {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `Đã xóa ${index}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
         newCoursesListRegister.splice(index, 1);
         state.coursesListRegister = newCoursesListRegister;
       }
       coursesListRegisterStorage.set(newCoursesListRegister);
     },
     // hủy ghi danh
-    setDeleteCoursesListRegister: (state, action) => {
-      let newCoursesListRegister = [...state.coursesListRegister];
-      let index = newCoursesListRegister.findIndex((course) => {
-        return course.maKhoaHoc === action.payload.maKhoaHoc;
-      });
-      if (index !== -1) {
-        newCoursesListRegister.splice(index, 1);
-        state.coursesListRegister = newCoursesListRegister;
-      }
-      coursesListRegisterStorage.set(newCoursesListRegister);
-    },
+    // setDeleteCoursesListRegister: (state, action) => {
+    //   let newCoursesListRegister = [...state.coursesListRegister];
+    //   let index = newCoursesListRegister.findIndex((course) => {
+    //     return course.maKhoaHoc === action.payload.maKhoaHoc;
+    //   });
+    //   if (index !== -1) {
+    //     newCoursesListRegister.splice(index, 1);
+    //     state.coursesListRegister = newCoursesListRegister;
+    //     Swal.fire({
+    //       position: "center",
+    //       icon: "success",
+    //       title: "Đã xóa môn học khỏi giỏ hàng!",
+    //       showConfirmButton: false,
+    //       timer: 1500,
+    //     });
+    //   }
+    //   coursesListRegisterStorage.set(newCoursesListRegister);
+    // },
 
 
     setCourseAddToCart: (state, action) => {
@@ -97,7 +111,13 @@ const coursesSlice = createSlice({
       if (index !== -1) {
         newCoursesListAddToCart.splice(index, 1);
         state.coursesListRegister = newCoursesListAddToCart;
-        message.success("Đã xóa môn học khỏi giỏ hàng!");
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Đã xóa môn học khỏi giỏ hàng!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
       coursesListRegisterStorage.set(newCoursesListAddToCart);
     },

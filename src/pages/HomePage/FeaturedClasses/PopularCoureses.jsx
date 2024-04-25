@@ -40,6 +40,7 @@ export default function PopularCourses() {
     if (user) {
       if (userInfo && userInfo.full_name) {
         const itemWithUser = {...course, full_name: userInfo.full_name};
+          console.log('itemWithUser: ', itemWithUser);
           dispatch(setCourseAddToCart(itemWithUser));
       }
     } else {

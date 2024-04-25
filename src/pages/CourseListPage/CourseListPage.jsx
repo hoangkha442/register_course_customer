@@ -13,6 +13,7 @@ import {
   setCoursesListWishList,
 } from "../../redux/coursesSlice";
 import Swal from "sweetalert2";
+import { UserService } from "../../services/UserService";
 
 export default function CourseListPage() {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export default function CourseListPage() {
   const [listCourses, setListCourses] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [sizeItem, setSizeItem] = useState(5);
+  const [userInfo, setUserInfo] = useState()
   const onChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -46,31 +48,21 @@ export default function CourseListPage() {
     return state.userSlice.userInfo;
   });
 
-  const handleAddToCart = (items, cart) => {
-    if (user) {
-      CoursesService.postRegisterCourses({
-        maKhoaHoc: items,
-        taiKhoan: user.taiKhoan,
+  useEffect(() => {
+    UserService.getMyInfor().then((res) => { 
+      setUserInfo(res.data)
+     }).catch((err) => { 
+      console.log('err: ', err);
       })
-        .then((res) => {
-          dispatch(setCourseAddToCart(cart));
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Added course to cart",
-            showConfirmButton: false,
-            timer: 1000,
-          });
-        })
-        .catch((err) => {
-          Swal.fire({
-            position: "center",
-            icon: "error",
-            title: "The course is already in your cart",
-            showConfirmButton: false,
-            timer: 1000,
-          });
-        });
+  }, []);
+  const handleAddToCart = (course) => {
+    console.log('course: ', course);
+    if (user) {
+      if (userInfo && userInfo.full_name) {
+        const itemWithUser = {...course, full_name: userInfo.full_name};
+        console.log('itemWithUser: ', itemWithUser);
+          dispatch(setCourseAddToCart(itemWithUser));
+      }
     } else {
       navigate("/login");
     }
@@ -125,7 +117,7 @@ export default function CourseListPage() {
             <div className="mt-2">
               <button
                 onClick={() => {
-                  handleAddToCart(item.maKhoaHoc, item);
+                  handleAddToCart(item);
                 }}
                 className="text-white w-full text-center py-1 border-none rounded bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] hover:bg-gradient-to-tl hover:from-[#ef4444] hover:to-[#fcd34d] transition-all duration-500 font-[500] uppercase flex items-center justify-center"
               >

@@ -12,7 +12,6 @@ import {
 } from "@ant-design/icons";
 import Swal from "sweetalert2";
 import { UserService } from "../../services/UserService";
-import { useInternalNotification } from "antd/es/notification/useNotification";
 
 export default function HeaderDesktop() {
   const navigate = useNavigate();
@@ -22,7 +21,6 @@ export default function HeaderDesktop() {
     return state.userSlice.userInfo;
   });
   const listRegisterCourses = useSelector((state) => {
-    console.log('state.coursesSlice: ', state.coursesSlice);
     return state.coursesSlice.coursesListRegister;
   });
   useEffect(() => {
@@ -54,7 +52,7 @@ export default function HeaderDesktop() {
   };
   
   const filteredCourses = listRegisterCourses.filter(course => {
-    return course.users && course.users.full_name && userInfo.includes(course.full_name);
+    return course  && course.full_name && userInfo.includes(course.full_name);
   });
   const handleSearch = (event) => {
     event.preventDefault();
