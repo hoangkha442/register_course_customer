@@ -14,6 +14,8 @@ import {
 } from "../../redux/coursesSlice";
 import Swal from "sweetalert2";
 import { UserService } from "../../services/UserService";
+import { fetchCartByUserId } from "../CheckOut/cartSlice";
+import { BASE_URL_IMG } from "../../services/Config";
 
 export default function CourseListPage() {
   const navigate = useNavigate();
@@ -21,8 +23,9 @@ export default function CourseListPage() {
 
   const [fallbackImage, setFallbackImage] = useState("");
   const [listCourses, setListCourses] = useState(null);
+  console.log('listCourses: ', listCourses);
   const [currentPage, setCurrentPage] = useState(1);
-  const [sizeItem, setSizeItem] = useState(5);
+  const [sizeItem, setSizeItem] = useState(8);
   const [userInfo, setUserInfo] = useState()
   const onChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -56,13 +59,26 @@ export default function CourseListPage() {
       })
   }, []);
   const handleAddToCart = (course) => {
-    console.log('course: ', course);
     if (user) {
-      if (userInfo && userInfo.full_name) {
-        const itemWithUser = {...course, full_name: userInfo.full_name};
-        console.log('itemWithUser: ', itemWithUser);
-          dispatch(setCourseAddToCart(itemWithUser));
-      }
+      const itemWithUser = {user_id: userInfo.user_id, class_id: course.class_id, quantity: 1}
+      UserService.postCart(itemWithUser).then((res) => { 
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: 'Khóa học đã được thêm vào giỏ hàng!',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        dispatch(fetchCartByUserId(userInfo.user_id));
+      }).catch((err) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: err.response.data.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
     } else {
       navigate("/login");
     }
@@ -82,7 +98,7 @@ export default function CourseListPage() {
           <figure class="rounded-md movie-item hover:before:left-[125%] relative overflow-hidden cursor-pointe">
             <img
               className="w-[320px] cursor-pointer h-[175px] object-cover rounded-md"
-              src={item.hinhAnh}
+              src={BASE_URL_IMG +  item.picture}
               alt={item.biDanh}
             />
             <NavLink to={`/detail/${item?.class_id}`}>

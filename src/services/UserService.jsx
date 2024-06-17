@@ -26,6 +26,17 @@ export const UserService = {
   },
   deleteUser: (userName) => { 
     return https.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${userName}`)
-   }
+   },
+
+   // CART
+  postCart: (data) => { 
+    return https.post("/cart", data)
+  },
+  getCartByUserId: (userId) => {
+    return https.get(`/cart/user/${userId}`)
+  },
+  deleteCartByID: (id) => {
+    return https.delete(`/cart/${id}`)
+  }
 }
 

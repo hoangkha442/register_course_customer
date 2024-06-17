@@ -1,10 +1,12 @@
+// CoursesService.js
 import { https } from "./Config";
+
 // CoursesService
 export const CoursesService = {
   getCoursesList: () => {
-    return https.get(`/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP15`);
+    return https.get(`/class`);
   },
-  getClassWithMostRegistrations: () => { 
+  getClassWithMostRegistrations: () => {
     return https.get('/class/most-registrations')
   },
   getCoursesListPopular: () => {
@@ -18,26 +20,21 @@ export const CoursesService = {
       `/class/pagination?page=${currentPage}&pageSize=${sizePage}`
     );
   },
-  getCategorySubject: () => { 
+  getCategorySubject: () => {
     return https.get('/subject')
-  }
-  ,  
-  getCourseOnCategory: () => { 
+  },
+  getCourseOnCategory: () => {
     return https.get(`/class`)
-   }
-  ,
-  postRegisterCourses: (data) => {
-    return https.post("/api/QuanLyKhoaHoc/DangKyKhoaHoc", data);
   },
-  postCancelCourses: (data) => {
-    return https.post("/api/QuanLyKhoaHoc/HuyGhiDanh", data);
-  }
-  ,
-  postCourses: (data) => {
-    return https.post("/api/QuanLyKhoaHoc/ThemKhoaHoc", data);
+
+  // POST COURSE REGISTER
+  postCoursesRegister: (data) => {
+    return https.post('/course-registration', data);
   },
-  postCoursesPicture: (data) => {
-    return https.post('/api/QuanLyKhoaHoc/ThemKhoaHocUploadHinh', data);
+  postMultipleCoursesRegister: (data) => {
+    return https.post('/course-registration/multiple', data);
+  },
+  deleteMultipleCartItems: (data) => {
+    return https.delete('/cart/multiple', { data });
   }
 }
-

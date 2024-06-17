@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import NavBar from "../HomePage/NavBar/NavBar";
@@ -9,33 +9,57 @@ import {
   setCourseAddToCart,
   setCoursesListWishList,
 } from "../../redux/coursesSlice";
+import { fetchCartByUserId } from "../CheckOut/cartSlice";
+import { UserService } from "../../services/UserService";
+import { BASE_URL_IMG } from "../../services/Config";
 const { Meta } = Card;
 
 export default function WishList() {
   const coursesWishLish = useSelector((state) => {
     return state.coursesSlice.coursesListWishList;
   });
+  const [userInfo, setUserInfo] = useState()
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // dispatch courses wish list
   const user = useSelector((state) => {
     return state.userSlice.userInfo;
   });
+
   useEffect(() => {
     if (!user) {
       navigate("/login");
     }
   }, []);
-  const handleAddToCart = (items, cart) => {
+  useEffect(() => {
+    UserService.getMyInfor().then((res) => { 
+      setUserInfo(res.data)
+     }).catch((err) => { 
+      console.log('err: ', err);
+      })
+  }, []);
+  const handleAddToCart = (course) => {
     if (user) {
-          dispatch(setCourseAddToCart(cart));
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Added course to cart",
-            showConfirmButton: false,
-            timer: 1000,
-          });
+      const itemWithUser = {user_id: userInfo.user_id, class_id: course.class_id, quantity: 1}
+      UserService.postCart(itemWithUser).then((res) => { 
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: 'Khóa học đã được thêm vào giỏ hàng!',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        dispatch(fetchCartByUserId(userInfo.user_id));
+      }).catch((err) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: err.response.data.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
     } else {
       navigate("/login");
     }
@@ -54,7 +78,7 @@ export default function WishList() {
           <figure class="rounded-md movie-item hover:before:left-[125%] relative overflow-hidden cursor-pointe">
             <img
               className="w-[320px] cursor-pointer h-[175px] object-cover rounded-md"
-              src={item.hinhAnh}
+              src={BASE_URL_IMG +  item.hinhAnh}
               alt={item.biDanh}
             />
             <NavLink to={`/detail/${item?.class_id}`}>
@@ -89,7 +113,7 @@ export default function WishList() {
             <div className="mt-2">
               <button
                 onClick={() => {
-                  handleAddToCart(item.maKhoaHoc, item);
+                  handleAddToCart(item);
                 }}
                 className="text-white w-full text-center py-1 border-none rounded bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] hover:bg-gradient-to-tl hover:from-[#ef4444] hover:to-[#fcd34d] transition-all duration-500 font-[500] uppercase flex items-center justify-center"
               >

@@ -5,9 +5,13 @@ import "./Courses.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setCourseAddToCart, setCoursesListWishList } from "../../../redux/coursesSlice";
 import { UserService } from "../../../services/UserService";
+import Swal from "sweetalert2";
+import { fetchCartByUserId } from "../../CheckOut/cartSlice";
+import { BASE_URL_IMG } from "../../../services/Config";
 
 export default function PopularCourses() {
   const [popularCourses, setPopularCourses] = useState([]);
+  console.log('popularCourses: ', popularCourses);
   const user = useSelector(state => state.userSlice.userInfo);
   const [userInfo, setUserInfo] = useState()
   const dispatch = useDispatch();
@@ -38,11 +42,25 @@ export default function PopularCourses() {
 
   const handleAddToCart = (course) => {
     if (user) {
-      if (userInfo && userInfo.full_name) {
-        const itemWithUser = {...course, full_name: userInfo.full_name};
-          console.log('itemWithUser: ', itemWithUser);
-          dispatch(setCourseAddToCart(itemWithUser));
-      }
+      const itemWithUser = {user_id: userInfo.user_id, class_id: course.class_id, quantity: 1}
+      UserService.postCart(itemWithUser).then((res) => { 
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: 'Khóa học đã được thêm vào giỏ hàng!',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        dispatch(fetchCartByUserId(userInfo.user_id));
+      }).catch((err) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: err.response.data.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
     } else {
       navigate("/login");
     }
@@ -57,7 +75,7 @@ export default function PopularCourses() {
             <div className="img col-span-4 rounded-md">
               <img
                 className="w-full lg:w-[320px] h-[175px] object-cover rounded-md"
-                src={course?.hinhAnh}
+                src={BASE_URL_IMG +  course?.picture}
                 alt={course?.class_name}
               />
             </div>
@@ -73,7 +91,7 @@ export default function PopularCourses() {
                   {course?.users?.full_name}
                 </p>
                 <div className="text-lg font-semibold text-[#666666]">
-                  <p>$14.99</p>
+                  <p>{course?.price}</p>
                 </div>
               </div>
             </div>

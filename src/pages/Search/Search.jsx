@@ -16,40 +16,46 @@ import {
 } from "../../redux/coursesSlice";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
-const { Meta } = Card;
+import { UserService } from "../../services/UserService";
+import { fetchCartByUserId } from "../CheckOut/cartSlice";
+import { BASE_URL_IMG } from "../../services/Config";
 export default function Search() {
   const [searchParams, setSearchParams] = useSearchParams([]);
   const [listCourses, setListCourses] = useState([]);
+  const [userInfo, setUserInfo] = useState()
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => {
     return state.userSlice.userInfo;
   });
-  const handleAddToCart = (items, cart) => {
-    if (user) {
-      CoursesService.postRegisterCourses({
-        maKhoaHoc: items,
-        taiKhoan: user.taiKhoan,
+  useEffect(() => {
+    UserService.getMyInfor().then((res) => { 
+      setUserInfo(res.data)
+     }).catch((err) => { 
+      console.log('err: ', err);
       })
-        .then((res) => {
-          dispatch(setCourseAddToCart(cart));
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Added course to cart",
-            showConfirmButton: false,
-            timer: 1000,
-          });
-        })
-        .catch((err) => {
-          Swal.fire({
-            position: "center",
-            icon: "error",
-            title: "The course is already in your cart",
-            showConfirmButton: false,
-            timer: 1000,
-          });
+  }, []);
+  const handleAddToCart = (course) => {
+    if (user) {
+      const itemWithUser = {user_id: userInfo.user_id, class_id: course.class_id, quantity: 1}
+      UserService.postCart(itemWithUser).then((res) => { 
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: 'Khóa học đã được thêm vào giỏ hàng!',
+          showConfirmButton: false,
+          timer: 1500,
         });
+        dispatch(fetchCartByUserId(userInfo.user_id));
+      }).catch((err) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: err.response.data.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
     } else {
       navigate("/login");
     }
@@ -64,7 +70,7 @@ export default function Search() {
 
   useEffect(() => {
     if (searchParams.get("q")) {
-      CoursesService.getCoursesListPopular()
+      CoursesService.getCoursesList()
         .then((res) => {
           setListCourses(res.data);
         })
@@ -74,9 +80,9 @@ export default function Search() {
     }
   }, [searchParams]);
   const listSearchCoursesValues = listCourses.filter((course) => {
-    return course.tenKhoaHoc
-      .toLowerCase()
-      .includes(searchParams.get("q").toLowerCase());
+    return course.class_name
+    .toLowerCase()
+    .includes(searchParams.get("q").toLowerCase());
   });
   // khi không tìm thấy kết quả nào
   const renderNoResultSearch = () => {
@@ -99,18 +105,14 @@ export default function Search() {
     );
   };
   return (
-    <div className="">
-      <div className="h-max-content min-h-screen w-full bg-cover bg-white flex overflow-hidden">
-        <div className="pt-[70px] lg:block hidden fixed h-screen top-0 w-[20%] bg-white flex-shrink-0  border-r border-r-[#e5e7eb]">
-          <NavBar />
-        </div>
-        <div className="min-h-screen w-full lg:w-[80%] ml-auto bg-[#f9fafb]">
+
+        <div className="bg-[#f9fafb]">
           <div className="py-[105px]">
             {listSearchCoursesValues?.length !== 0 ? (
               <div className="container-90">
                 <div className="flex flex-col text-start w-full mb-5">
                   <h1 className="sm:text-3xl tracking-wider text-2xl font-bold title-font text-gray-900">
-                    {listSearchCoursesValues?.length} results for "
+                    {listSearchCoursesValues?.length} môn học được tìm thấy theo từ khóa "
                     {searchParams.get("q")}"
                   </h1>
                 </div>
@@ -119,18 +121,18 @@ export default function Search() {
                     <div className="cursor-pointer">
                       <div
                         className="lg:flex flex-row space-x-0 lg:space-y-0 space-y-5 lg:space-x-5 py-5 border-b"
-                        key={item.maKhoaHoc}
+                        key={item.class_id}
                       >
                         <div
                           onClick={() => {
-                            navigate(`/detail/${item?.maKhoaHoc}`);
+                            navigate(`/detail/${item?.class_id}`);
                           }}
                           className="lg:w-64 w-full md:h-96 h-60 lg:h-36 flex-shrink-0 border"
                         >
                           <img
                             className="object-cover h-full w-full rounded-sm"
-                            src={item.hinhAnh}
-                            alt={item.tenKhoaHoc}
+                            src={BASE_URL_IMG + item?.picture}
+                            alt={item?.class_name}
                           />
                         </div>
                         <div className="text-base w-full">
@@ -143,7 +145,7 @@ export default function Search() {
                             className="bg-white shadow-md"
                             content={
                               <div className="text-black p-5">
-                                <p>What you’ll learn</p>
+                                <p>Bạn sẽ học được gì?</p>
                                 <ul>
                                   <li className="flex items-center">
                                     <CheckOutlined className="mr-2" />
@@ -164,13 +166,13 @@ export default function Search() {
                                   </li>
                                 </ul>
                                 <p class="font-semibold mt-1 text-[#2d2d2d]">
-                                  CREATED BY:
-                                  {item.nguoiTao.hoTen === null
+                                  Giảng viên:
+                                  {item?.users?.full_name === null
                                     ? "Incognito"
-                                    : item.nguoiTao.hoTen}
+                                    : item?.users?.full_name}
                                 </p>
                                 <p className="font-semibold mt-1 text-[#2d2d2d]">
-                                  DATE CREATE: {item.ngayTao}
+                                  Ngày học: {item?.schedule}
                                 </p>
                               </div>
                             }
@@ -183,21 +185,20 @@ export default function Search() {
                             >
                               <div className="flex items-center justify-between">
                                 <p className="font-semibold md:leading-relaxed md:text-[18px] text-[#2d2d2d]">
-                                  {item?.tenKhoaHoc}
+                                  {item?.class_name}
                                 </p>
-                                <div class="text-lg lg:block hidden font-semibold text-[#2d2d2d]">
-                                  <p>₫15,999,000</p>
+                                <div class="text-lg lg:block hidden font-semibold text-red-500">
+                                  <p>{(item?.price * 100).toLocaleString('de-DE') + ' VNĐ'}</p>
                                 </div>
                               </div>
                               <div className="flex justify-between my-1">
                                 <p className="md:block text-sm hidden text-[#2d2d2d] font-[300] pr-36">
-                                  {item?.moTa?.length > 80
-                                    ? item?.moTa.slice(0, 100) + "..."
-                                    : item?.moTa +
-                                      "Grafana from Basic to ADVANCE level; Complete Guide to Master DevOps Monitoring & Alerting"}
+                                  {item?.description?.length > 80
+                                    ? item?.description.slice(0, 100) + "..."
+                                    : item?.description }
                                 </p>
                                 <div class="text-xs lg:block hidden  line-through font-semibold text-[#2d2d2d]">
-                                  <p>₫16,999,000</p>
+                                  <p>{(item?.price * 100).toLocaleString('de-DE') + ' VND'}</p>
                                 </div>
                               </div>
                               <div className="flex items-center space-x-3">
@@ -212,25 +213,21 @@ export default function Search() {
                                   </div>
                                 </p>
                                 <div className="flex items-center text-base text-[#2d2d2d]">
-                                  <UsergroupAddOutlined /> {item?.luotXem}
-                                  Enerolled
+                                  <UsergroupAddOutlined /> {item?.registered_students}
+                                  Học viên
                                 </div>
                               </div>
                               <div class="flex items-center justify-between">
                                 <div class="flex space-x-2 items-center text-sm pt-1 text-[#2d2d2d]">
-                                  <p>13 hours</p>
-                                  <p>·</p>
-                                  <p>32 lectures</p>
-                                  <p>·</p>
-                                  <p>All levels</p>
+                                  {item?.schedule}
                                 </div>
                               </div>
                               <div className="flex space-x-3 items-center lg:hidden">
                                 <div class="text-lg font-semibold text-[#2d2d2d]">
-                                  <p>₫15,999,000</p>
+                                  <p>{(item?.price * 100).toLocaleString('de-DE') + ' VNĐ'}</p>
                                 </div>
                                 <div class="text-xs  line-through font-semibold text-[#2d2d2d]">
-                                  <p>₫16,999,000</p>
+                                  <p>{(item?.price * 100).toLocaleString('de-DE') + ' VNĐ'}</p>
                                 </div>
                               </div>
                             </div>
@@ -246,12 +243,12 @@ export default function Search() {
                             </div>
                             <button
                               onClick={() => {
-                                handleAddToCart(item.maKhoaHoc, item);
+                                handleAddToCart(item);
                               }}
-                              className="text-white text-center w-full lg:w-[20%] py-1 border-none rounded bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] hover:bg-gradient-to-tl hover:from-[#ef4444] hover:to-[#fcd34d] transition-all duration-500 font-[500] uppercase flex items-center justify-center"
+                              className="text-white text-center w-full lg:w-[30%] py-1 border-none rounded bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] hover:bg-gradient-to-tl hover:from-[#ef4444] hover:to-[#fcd34d] transition-all duration-500 font-[500] uppercase flex items-center justify-center"
                             >
                               <span className="hover:text-white text-[15px]">
-                                Add to cart
+                                Thêm vào giỏ hàng
                               </span>
                               <i class="fa fa-angle-right ml-1 text-[10px] mt-[2px] font-bold"></i>
                             </button>
@@ -267,7 +264,5 @@ export default function Search() {
             )}
           </div>
         </div>
-      </div>
-    </div>
   );
 }

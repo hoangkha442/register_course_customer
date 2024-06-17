@@ -6,13 +6,11 @@ import PopularCourses from './PopularCoureses';
 
 export default function FeaturedClasses() {
     const [featureCourses, setFeatureCourses] = useState([]);
-    console.log('featureCourses: ', featureCourses);
 
     useEffect(() => {
         async function fetchCourses() {
             try {
                 const res = await CoursesService.getClassWithMostRegistrations();
-                console.log('res: ', res);
                 setFeatureCourses(res.data);
             } catch (err) {
                 console.error('Failed to fetch courses:', err);

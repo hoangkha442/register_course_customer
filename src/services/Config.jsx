@@ -3,6 +3,8 @@ import { userLocalStorage } from "./LocalService";
 import { batLoading, tatLoading } from "../redux/spinnerSlice";
 import { store } from "..";
 
+export const BASE_URL_IMG = 'http://localhost:8080/public/img/class/'
+
 export const https = axios.create(
     {
         baseURL: 'http://localhost:8080/',

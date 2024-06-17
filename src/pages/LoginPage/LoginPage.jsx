@@ -25,6 +25,7 @@ export default function LoginPage() {
         userLocalStorage.set(res.data);
         setTimeout(() => {
           navigate('/')
+          window.location.reload();
         }, 500);
       })
       .catch((err) => {

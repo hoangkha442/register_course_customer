@@ -8,40 +8,47 @@ import { setCourseAddToCart, setCoursesListWishList } from "../../../redux/cours
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "antd";
 import Swal from "sweetalert2";
+import { UserService } from "../../../services/UserService";
+import { fetchCartByUserId } from "../../CheckOut/cartSlice";
+import { BASE_URL_IMG } from "../../../services/Config";
 
 export default function CoursesOnCategory() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [userInfo, setUserInfo] = useState()
   const [courses, setCourses] = useState([])
   let { tenMonHoc } = useParams();
   const user = useSelector((state) => {
     return state.userSlice.userInfo;
   });
-  const handleAddToCart = (items, cart) => {
-    if (user) {
-      CoursesService.postRegisterCourses({
-        maKhoaHoc: items,
-        taiKhoan: user.taiKhoan,
+  useEffect(() => {
+    UserService.getMyInfor().then((res) => { 
+      setUserInfo(res.data)
+     }).catch((err) => { 
+      console.log('err: ', err);
       })
-        .then((res) => {
-          dispatch(setCourseAddToCart(cart));
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Added course to cart",
-            showConfirmButton: false,
-            timer: 1000,
-          });
-        })
-        .catch((err) => {
-          Swal.fire({
-            position: "center",
-            icon: "error",
-            title: "The course is already in your cart",
-            showConfirmButton: false,
-            timer: 1000,
-          });
+  }, []);
+  const handleAddToCart = (course) => {
+    if (user) {
+      const itemWithUser = {user_id: userInfo.user_id, class_id: course.class_id, quantity: 1}
+      UserService.postCart(itemWithUser).then((res) => { 
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: 'Khóa học đã được thêm vào giỏ hàng!',
+          showConfirmButton: false,
+          timer: 1500,
         });
+        dispatch(fetchCartByUserId(userInfo.user_id));
+      }).catch((err) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: err.response.data.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
     } else {
       navigate("/login");
     }
@@ -72,7 +79,7 @@ export default function CoursesOnCategory() {
           <figure class="rounded-md movie-item hover:before:left-[125%] relative overflow-hidden cursor-pointe">
             <img
               className="sm:w-[320px] w-full cursor-pointer h-[175px] object-cover rounded-md"
-              src={item.hinhAnh}
+              src={BASE_URL_IMG + item.picture}
               alt={item.biDanh}
             />
             <NavLink to={`/detail/${item?.class_id}`}>
@@ -107,7 +114,7 @@ export default function CoursesOnCategory() {
             <div className="mt-2">
               <button
                 onClick={() => {
-                  handleAddToCart(item.class_id, item);
+                  handleAddToCart(item);
                 }}
                 className="text-white w-full text-center py-1 border-none rounded bg-gradient-to-tl from-[#fcd34d] to-[#ef4444] hover:bg-gradient-to-tl hover:from-[#ef4444] hover:to-[#fcd34d] transition-all duration-500 font-[500] uppercase flex items-center justify-center"
               >
@@ -142,11 +149,8 @@ export default function CoursesOnCategory() {
     }
    }
   return (
-      <div className="h-max-content min-h-screen w-full bg-cover bg-white flex overflow-hidden">
-        <div className="pt-[70px] lg:block hidden fixed h-screen top-0 w-[20%] bg-white flex-shrink-0  border-r border-r-[#e5e7eb]">
-          <NavBar />
-        </div>
-        <div className="min-h-screen w-full lg:w-[80%] ml-auto bg-[#f9fafb]">
+
+        <div className="min-h-screen w-full ml-auto bg-[#f9fafb]">
           <div className="py-[105px] px-10">
             <p className="mb-6 text-4xl tracking-wider font-bold">Lớp {tenMonHoc}</p>
             <p className="font-[500] mb-4 ">{getSlogan(tenMonHoc)}</p>
@@ -155,6 +159,5 @@ export default function CoursesOnCategory() {
             </div>
           </div>
         </div>
-      </div>
   );
 }

@@ -8,6 +8,7 @@ import userSlice from './redux/userSlice';
 import coursesSlice from './redux/coursesSlice';
 import spinnerSlice from './redux/spinnerSlice';
 import { configureStore } from '@reduxjs/toolkit';
+import cartSlice from './pages/CheckOut/cartSlice';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 export let store = configureStore({
@@ -15,6 +16,7 @@ export let store = configureStore({
     userSlice,
     coursesSlice,
     spinnerSlice,
+    cart: cartSlice,
   },
 });
 root.render(  
